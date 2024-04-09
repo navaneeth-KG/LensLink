@@ -1,5 +1,6 @@
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import { useNavigate } from 'react-router-dom';
 import './style.css';
 const images = [
   '/baby.jpg',
@@ -10,7 +11,15 @@ const images = [
   '/product.jpg',
   '/frame.jpg',
 ];
+
 const Home = () => {
+  const Navigate = useNavigate();
+  const onBook = () => {
+    Navigate('/user/book');
+  };
+  const cta=()=>{
+    Navigate('/photographer/signup')
+  }
   return (
     <div className="home">
       <div className="home-header">
@@ -18,7 +27,9 @@ const Home = () => {
           Discover Amazing Photographers
           <br /> for Every Occasion in Kerala.
         </h1>
-        <Button className="book-btn">Book now</Button>
+        <Button className="book-btn" onClick={onBook}>
+          Book now
+        </Button>
       </div>
 
       <div className="home-main">
@@ -53,7 +64,7 @@ const Home = () => {
           Ready to Showcase Your Talent? Join Our Community of Photographers
           Today!
         </h1>
-        <Button className="join">Join as Photographer</Button>
+        <Button className="join" onClick={cta}>Join as Photographer</Button>
       </div>
       <div className="home-about">
         <p>
@@ -84,7 +95,7 @@ const Home = () => {
           <p>about us</p>
           <p>sservices</p>
         </div>
-        <p className='copyright'>© 2024 LensLink</p>
+        <p className="copyright">© 2024 LensLink</p>
       </div>
     </div>
   );

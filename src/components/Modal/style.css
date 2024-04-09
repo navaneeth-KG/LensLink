@@ -1,0 +1,13 @@
+.modal{
+    width: 50vw;
+    height: 50vh;
+    background-color: white;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    gap:30px
+}
+
+.modal-post-btn{
+    background-color: blue;
+}

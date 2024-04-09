@@ -43,7 +43,7 @@
   display: flex;
   width: 100%;
   gap: 30px;
-  animation: 10s slide infinite linear;
+  animation: 20s slide infinite linear;
 }
 
 /* .outer-home-main::before {
@@ -75,6 +75,7 @@
   background-size: cover;
   /* border: 1px solid red; */
   flex-shrink: 0;
+  border-radius: 5px;
   cursor: pointer;
 }
 

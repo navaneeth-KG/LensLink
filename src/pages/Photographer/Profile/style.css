@@ -1,0 +1,67 @@
+.service-card {
+  width: fit-content;
+  height: fit-content;
+  padding: 10px;
+  border: 1px solid rgb(255, 254, 254);
+}
+.service-cont {
+  width: 50%;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.pg-profile {
+  background-color: black;
+  color: white;
+  height: fit-content;
+}
+.post-btn {
+  background-color: rgb(74, 74, 215);
+  position: absolute;
+  right: 10px;
+  top: 100px;
+}
+.post-modal {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  top: 100px;
+  padding: 30px;
+  /* text-align: center */
+}
+.modal-container {
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top:0
+}
+.posts-container{
+    background-color:rgb(43, 41, 41);
+    width: 90%;
+    height: fit-content;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap:5px
+
+}
+.post-image{
+    height: 200px;
+    width: 200px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    /* border: 1px solid red; */
+    
+}
+
+/* .post-image:hover{
+
+    scale: 1.5;
+    cursor: pointer;
+} */

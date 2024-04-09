@@ -1,0 +1,26 @@
+.user-pg-profile-posts{
+    background-color: rgb(34, 32, 32);
+    height: fit-content;
+    padding: 20px;
+    display: flex;   
+    flex-wrap: wrap;
+    gap:5px;
+    margin-top: 30px;
+    justify-content: center
+}
+.post{
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 200px;
+    width: 200px;
+    background-size: cover;
+}
+.user-pg-profile{
+
+    background-color: black;
+    color: wheat;
+    padding:20px;
+    min-height: 100vh;
+    
+
+}
