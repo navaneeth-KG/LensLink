@@ -1,0 +1,18 @@
+.pg-booking{
+    width: 100%;
+    min-height: 100vh;
+    background-color: black;
+    color: aliceblue;;
+    display: flex;
+    gap: 10px
+
+}
+
+.app-card{
+
+    border :2px solid grey;
+    height: fit-content;
+    width: fit-content;
+    padding: 20px;
+    
+}

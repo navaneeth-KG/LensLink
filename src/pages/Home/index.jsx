@@ -33,13 +33,13 @@ const Home = () => {
       </div>
 
       <div className="home-main">
-        <div className="search-container">
+        {/* <div className="search-container">
           <Input
             className="search-input"
             placeholder="find photographers by location"
           />
           <Button className="search-btn">search</Button>
-        </div>
+        </div> */}
 
         <div className="slider-container">
           <div className="slider">

@@ -24,3 +24,17 @@
     
 
 }
+
+.review-modal{
+    position: fixed;
+    z-index:2;
+    right: 0;
+    left:0;
+    margin: auto;
+    background-color: aliceblue;
+    width: fit-content;
+    height: fit-content;
+    background-color: rgb(92, 88, 88);
+    box-shadow: 0 0 10px 10px rgba(1, 1, 1, 0.3);
+    padding: 20px;
+}

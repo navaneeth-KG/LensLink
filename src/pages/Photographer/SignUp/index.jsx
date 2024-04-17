@@ -2,6 +2,7 @@ import Select from '../../../components/Select';
 import './style.css';
 import Input from '../../../components/Input';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Button from './../../../components/Button/index';
 
@@ -115,7 +116,7 @@ const SignUp = () => {
           }}
         />
         <Button onClick={onSignUp}>sign up</Button>
-        <Link to='/photographer/signup'>dont have an account?sign up</Link>
+        <Link to='/photographer/login'>have an account?sign in</Link>
       </div>
     </div>
   );

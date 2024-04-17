@@ -1,0 +1,10 @@
+.review-cont{
+    width: 100%;
+    height: fit-content;
+    padding: 20px;
+    border:2px solid red;
+}
+.pg-review{
+    display: flex;
+    flex-direction: column;
+}

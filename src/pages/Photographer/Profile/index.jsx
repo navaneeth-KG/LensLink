@@ -14,6 +14,9 @@ const Profile = () => {
     image: '',
     caption: '',
     photographer: getId(),
+    likes: {
+      count: 0,
+    },
   });
 
   const [posts, setPosts] = useState([]);
@@ -21,7 +24,7 @@ const Profile = () => {
   const fetchData = async () => {
     setLoading(true);
     const response = await axios.get(
-     ` http://localhost:4999/photographer/${getId()}`
+      ` http://localhost:4999/photographer/${getId()}`
     );
     setPg(response.data);
     setLoading(false);
@@ -38,14 +41,32 @@ const Profile = () => {
   const onPost = async () => {
     const response = await axios.post('http://localhost:4999/pg/post', post);
     console.log(response);
-    fetchData2()
-    SetIsOpen(false)
+    fetchData2();
+    SetIsOpen(false);
+  };
+
+  const onLike = async id => {
+    const response = await axios.patch(
+      `http://localhost:4999/pg/post/${id}/like/${getId()}`
+    );
+    
+    fetchData2();
+    alert(response.data.message);
+  };
+
+  const onDisLike = async id => {
+    const response = await axios.patch(
+      `http://localhost:4999/pg/post/${id}/unlike/${getId()}`
+    );
+    
+    fetchData2();
+    alert(response.data.message);
   };
   useEffect(() => {
     fetchData();
     fetchData2();
   }, []);
- console.log(posts);
+  console.log(posts);
   return (
     <>
       {loading ? (
@@ -79,8 +100,6 @@ const Profile = () => {
                 post={post}
                 setPost={setPost}
                 onPost={onPost}
-               
-                
               />
             </div>
           )}
@@ -89,10 +108,38 @@ const Profile = () => {
             {posts.map(item => {
               return (
                 <div
-                key={item._id}
+                  key={item._id}
                   className="post-image"
-                  style={{ backgroundImage: `url(${item.image})` }}
-                ></div>
+                  style={{
+                    backgroundImage: `url(${item.image})`,
+                    position: 'relative',
+                  }}
+                >
+                  <p
+                    style={{
+                      color: 'red',
+                      position: 'absolute',
+                      top: 0,
+                      right: 0,
+                    }}
+                  >
+                    {item.likes.count ? item.likes.count : '0'}
+                  </p>
+                  <i
+                    class="fa-solid fa-thumbs-up"
+                    style={{cursor:'pointer'}}
+                    onClick={() => {
+                      onLike(item._id);
+                    }}
+                  ></i>
+                  <i
+                    class="fa-solid fa-thumbs-down"
+                    style={{cursor:'pointer'}}
+                    onClick={() => {
+                      onDisLike(item._id);
+                    }}
+                  ></i>
+                </div>
               );
             })}
           </div>
