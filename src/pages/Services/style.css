@@ -1,0 +1,45 @@
+.services-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: fit-content;
+  justify-content: center;
+  gap:20px;
+}
+
+.services-image {
+  height: 300px;
+  width: 200px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  /* justify-content: center;
+  align-items: center; */
+  border-radius: 5px;
+  /* padding: 10px; */
+  cursor: pointer;
+  text-align: center;
+
+}
+.services-name{
+    font-size: 24px;
+    /* border: 2px solid white; */
+    color:white;
+    background-color: rgba(0, 0, 0,0.5);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items:center ;
+}
+.service{
+    background-color: black;
+    color: aliceblue;
+    padding: 20px;
+}
+
+.services-image:hover .services-name{
+    background-color: rgba(0, 0, 0,0) ;
+    color: rgb(7, 7, 7);
+
+}

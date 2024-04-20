@@ -1,7 +1,8 @@
 import './style.css';
 import Button from '../Button';
 import axios from 'axios';
-const Modal = ({ className, onClick, post, setPost, onPost }) => {
+import Select from '../Select';
+const Modal = ({ className, onClick, post, setPost, onPost ,category}) => {
   const onChange = async (e, key) => {
     if (key == 'image') {
       const formdata = new FormData();
@@ -11,12 +12,13 @@ const Modal = ({ className, onClick, post, setPost, onPost }) => {
         formdata
       );
       setPost({ ...post, image: response.data.url });
-    }
-    if (key == 'caption') {
+    } else if (key == 'caption') {
       setPost({ ...post, caption: e.target.value });
+    }else if(key =='category'){
+      setPost({...post,category:e.target.value})
     }
   };
- 
+
   return (
     <div className={`modal ${className}`}>
       <input
@@ -32,11 +34,18 @@ const Modal = ({ className, onClick, post, setPost, onPost }) => {
           onChange(e, 'caption');
         }}
       />
+      <Select
+        onChange={e => {
+          onChange(e, 'category');
+        }}
+        array={category}
+        placeholder="select category"
+      />
 
-      <button onClick={onClick}>cancel</button>
       <Button className="modal-post-btn" onClick={onPost}>
         post
       </Button>
+      <button onClick={onClick}>cancel</button>
     </div>
   );
 };

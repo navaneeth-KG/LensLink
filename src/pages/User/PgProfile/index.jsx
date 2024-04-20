@@ -16,7 +16,9 @@ const PgProfile = () => {
     client: getId(),
     rating: 0,
     message: '',
+    service:''
   });
+  const [service, setService] = useState([]);
   const [view, setView] = useState(false);
   const [array, setArray] = useState([
     { name: '5', value: 5 },
@@ -26,14 +28,21 @@ const PgProfile = () => {
     { name: '1', value: 1 },
   ]);
 
-  const [rating,setRating]= useState()
+  const [rating, setRating] = useState();
   const navigate = useNavigate();
   const fetchPg = async () => {
     const response = await axios.get(
       `http://localhost:4999/photographer/${id}`
     );
     setpg(response.data);
+    setService(response.data.service.map(item=>{return{name:item.service.name,value:item.service._id}}))
+    
+      
+    
   };
+  console.log(pg);
+  console.log(service);
+
   const fetchPosts = async () => {
     const response = await axios.get(
       `http://localhost:4999/pg/post/photographer/${id}`
@@ -61,26 +70,20 @@ const PgProfile = () => {
   };
   console.log(review);
 
-  const fetchReviews =async()=>{
-    const response = await axios.get(`http://localhost:4999/review/${id}`)
+  const fetchReviews = async () => {
+    const response = await axios.get(`http://localhost:4999/review/${id}`);
     console.log(response.data);
-    const avgReview = response.data.map(item=>item.rating)
+    const avgReview = response.data.map(item => item.rating);
     console.log(avgReview);
-    let sum = 0
-    avgReview.forEach(item=>sum=sum+item)
-    setRating(sum/avgReview.length)
-
-
-
-
-  }
-
- 
+    let sum = 0;
+    avgReview.forEach(item => (sum = sum + item));
+    setRating(sum / avgReview.length);
+  };
 
   const onLike = async id => {
     const response = await axios.patch(
       `http://localhost:4999/pg/post/${id}/like/${getId()}`
-    );    
+    );
     fetchPosts();
     alert(response.data.message);
   };
@@ -88,10 +91,15 @@ const PgProfile = () => {
   const onDisLike = async id => {
     const response = await axios.patch(
       `http://localhost:4999/pg/post/${id}/unlike/${getId()}`
-    );    
+    );
     fetchPosts();
     alert(response.data.message);
   };
+
+  const serviceSelect=(e)=>{
+    setreview({...review,service:e.target.value})
+
+  }
   useEffect(() => {
     fetchPg();
     fetchPosts();
@@ -104,11 +112,22 @@ const PgProfile = () => {
         <h1>{pg.name}</h1>
         <p>{pg.place}</p>
         <p>{pg.email}</p>
-        <p><i class="fa-solid fa-star"></i>{rating}/5</p>
+        <p>
+          <i class="fa-solid fa-star"></i>
+          {rating}/5
+        </p>
+        
       </div>
 
       <button onClick={postReview}>post a review</button>
-      <small onClick={()=>{navigate(`/user/pg-review/${id}`)}}>view all reviews</small>
+      <small
+        onClick={() => {
+          navigate(`/user/pg-review/${id}`);
+        }}
+      >
+        view all reviews
+      </small>
+      <Button onClick={()=>{navigate(`/user/pgprofile/book/${id}`)}}>Book</Button>
       {view && (
         <ReviewModel
           onComment={onComment}
@@ -116,6 +135,8 @@ const PgProfile = () => {
           ratingSelect={ratingSelect}
           ReviewPost={ReviewPost}
           setView={setView}
+          service={service}
+          serviceSelect={serviceSelect}
         />
       )}
       <div className="user-pg-profile-posts">
@@ -124,7 +145,10 @@ const PgProfile = () => {
             return (
               <div
                 className="post"
-                style={{ backgroundImage: `url(${item.image})` ,position:'relative'}}
+                style={{
+                  backgroundImage: `url(${item.image})`,
+                  position: 'relative',
+                }}
               >
                 <p
                   style={{
@@ -169,6 +193,8 @@ const ReviewModel = ({
   ReviewPost,
   ratingSelect,
   setView,
+  service,
+  serviceSelect
 }) => {
   return (
     <div className="review-modal">
@@ -177,6 +203,11 @@ const ReviewModel = ({
         array={array}
         onChange={ratingSelect}
         placeholder="Select a rating"
+      />
+      <Select
+        array={service}
+        onChange={serviceSelect}
+        placeholder="Select service "
       />
       <Button onClick={ReviewPost}>post</Button>
       <button

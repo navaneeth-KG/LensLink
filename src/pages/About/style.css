@@ -1,0 +1,25 @@
+.about{
+    padding: 20px;
+    background-color: black;
+    color: aliceblue;
+    min-height: 100vh;
+    color: rgb(198, 192, 192);
+}
+.about h1{
+    color: rgb(240, 242, 244);
+}
+.about span{
+    color: aqua;
+}
+.about-cta{
+    height: 80px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:10px
+
+}
+.about-btn{
+    color: aqua;
+}

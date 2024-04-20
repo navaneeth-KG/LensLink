@@ -26,6 +26,7 @@ const PgReview = () => {
                 <StarView rating={item.rating}/>                
                 <p>{item.message}</p>
                 <p>posted by:{item.client.name}</p>
+                <p>service :{item.service}</p>
                 <p></p>
               </div>
             );

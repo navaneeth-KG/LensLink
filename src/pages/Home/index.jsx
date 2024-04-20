@@ -2,6 +2,7 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import { useNavigate } from 'react-router-dom';
 import './style.css';
+import Footer from '../../components/Footer';
 const images = [
   '/baby.jpg',
   '/prewedding.jpg',
@@ -19,6 +20,9 @@ const Home = () => {
   };
   const cta=()=>{
     Navigate('/photographer/signup')
+  }
+  const cta2=()=>{
+    Navigate('/user/book')
   }
   return (
     <div className="home">
@@ -73,30 +77,11 @@ const Home = () => {
           ready to capture your unique story. Join our vibrant community today
           and let's turn your moments into timeless memories
         </p>
-        <Button className="join">Book a Photographer</Button>
+        <Button className="join" onClick={cta2}>Book a Photographer</Button>
       </div>
+      <Footer/>
 
-      <div className="footer">
-        {/* <i className="fa-brands fa-square-facebook" ></i>
-      <i className="fa-brands fa-square-instagram" ></i>
-      <i className="fa-brands fa-square-x-twitter" ></i> */}
 
-        <h2>follow us on</h2>
-
-        <div className="social-icons">
-          {' '}
-          <i className="fa-brands fa-instagram"></i>
-          <i className="fa-brands fa-facebook-f"></i>
-          <i className="fa-brands fa-x-twitter"></i>
-        </div>
-
-        <div className="options">
-          <p>report an issue</p>
-          <p>about us</p>
-          <p>sservices</p>
-        </div>
-        <p className="copyright">© 2024 LensLink</p>
-      </div>
     </div>
   );
 };

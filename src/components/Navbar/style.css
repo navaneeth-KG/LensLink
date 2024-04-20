@@ -11,9 +11,29 @@
 }
 .navbar ul li {
   list-style: none;
+  text-decoration: underline;
+  color: aliceblue;
 }
-.navbar ul{
-    display: flex;
-    gap:20px
+.navbar ul {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+ 
+  
+}
+.drop-down-cont {
+  background-color: rgb(35, 33, 33);
+  height: fit-content;
+  padding: 30px;
+  width: fit-content;
+  position: absolute;
+  top:60px ;
+  right: 10px;
+  color: rgb(235, 235, 235);
+  z-index: 3;
+}
+.drop-down-cont p:hover{
+  background-color: rgb(114, 114, 114);
+  
 }
 

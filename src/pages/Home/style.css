@@ -150,35 +150,3 @@
   border: 2px solid aqua;
 }
 
-.footer{
-  width: 100%;
-  height: 40vh;
-  background-color: black;
-}
-
-.fa-brands{
-  color: white;
-  font-size: 28px;
-}
-.footer{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color:white;
-  gap:30px;
-
-}
-.social-icons{
-  display: flex;
-  width: 50%;
-  justify-content: space-around;
-}
-.options {
-  display: flex;
-  gap: 10px;
-}
-.copyright{
-  font-size: 10px;
-  color: gray;
-}

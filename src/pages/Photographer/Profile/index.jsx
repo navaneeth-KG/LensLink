@@ -17,9 +17,11 @@ const Profile = () => {
     likes: {
       count: 0,
     },
+    category: '',
   });
 
   const [posts, setPosts] = useState([]);
+  const [category, setCategory] = useState([]);
 
   const fetchData = async () => {
     setLoading(true);
@@ -38,6 +40,14 @@ const Profile = () => {
     setPosts(response.data);
     setLoading(false);
   };
+  const fetchService = async () => {
+    const response = await axios.get(`http://localhost:4999/service/`);
+    setCategory(
+      response.data.map(item => {
+        return { name: item.name, value: item._id };
+      })
+    );
+  };
   const onPost = async () => {
     const response = await axios.post('http://localhost:4999/pg/post', post);
     console.log(response);
@@ -49,7 +59,7 @@ const Profile = () => {
     const response = await axios.patch(
       `http://localhost:4999/pg/post/${id}/like/${getId()}`
     );
-    
+
     fetchData2();
     alert(response.data.message);
   };
@@ -58,18 +68,21 @@ const Profile = () => {
     const response = await axios.patch(
       `http://localhost:4999/pg/post/${id}/unlike/${getId()}`
     );
-    
+
     fetchData2();
     alert(response.data.message);
   };
   useEffect(() => {
     fetchData();
     fetchData2();
+    fetchService();
   }, []);
-  console.log(posts);
+  // console.log(posts);
+  // console.log(post);
+  console.log(pg);
   return (
     <>
-      {loading ? (
+      {!pg ? (
         <Loading />
       ) : (
         <div className="pg-profile">
@@ -77,9 +90,9 @@ const Profile = () => {
           <p>{pg.email}</p>
           <p>{pg.place}</p>
           <div className="service-cont">
-            {pg.service.map(item => (
-              <div className="service-card">{item.service}</div>
-            ))}
+            {pg.service&&pg.service.map(item => {
+              return <div className="service-card" >{item.service.name}</div>;
+            })}
           </div>
 
           <Button
@@ -100,6 +113,7 @@ const Profile = () => {
                 post={post}
                 setPost={setPost}
                 onPost={onPost}
+                category={category}
               />
             </div>
           )}
@@ -127,14 +141,14 @@ const Profile = () => {
                   </p>
                   <i
                     class="fa-solid fa-thumbs-up"
-                    style={{cursor:'pointer'}}
+                    style={{ cursor: 'pointer' }}
                     onClick={() => {
                       onLike(item._id);
                     }}
                   ></i>
                   <i
                     class="fa-solid fa-thumbs-down"
-                    style={{cursor:'pointer'}}
+                    style={{ cursor: 'pointer' }}
                     onClick={() => {
                       onDisLike(item._id);
                     }}

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { getId } from '../../../utils';
 import './style.css';
 import axios from 'axios';
+import Loading from '../../../components/Loading';
 
 const PgBooking = () => {
   const [apps, setApps] = useState([]);
@@ -56,7 +57,8 @@ const PgBooking = () => {
           );
         })
       ) : (
-        <p style={{ margin: '0 auto' }}>no bookings</p>
+        // <p style={{ margin: '0 auto' }}>no bookings</p>
+        <Loading/>
       )}
     </div>
   );

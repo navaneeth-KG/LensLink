@@ -1,11 +1,17 @@
 .modal{
     width: 50vw;
-    height: 50vh;
+    height: fit-content;
     background-color: white;
     color: black;
     display: flex;
     flex-direction: column;
-    gap:30px
+    gap:30px;
+    position:fixed;
+    right: 0;
+    left: 0;
+    top:50px;
+    margin: auto;
+    z-index: 3;
 }
 
 .modal-post-btn{
