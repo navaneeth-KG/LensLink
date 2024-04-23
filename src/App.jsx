@@ -16,6 +16,7 @@ import Services from './pages/Services';
 import ServicePage from './pages/Service';
 import ProfileBook from './pages/User/ProfileBook';
 import Gallery from './pages/Gallery';
+import PgList from './pages/PgList';
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
         <Route path="/services" element={<Services />} />
         <Route path="/service/details/:id" element={<ServicePage />} />
         <Route path="/service/details/gallery/:id" element={<Gallery />} />
+        <Route path="/service/details/pglist/:id" element={<PgList />} />
 
 
         <Route path="/photographer/login" element={<Login />} />

@@ -44,7 +44,7 @@ const Navbar = () => {
               onClick={onClick}
             />
           ) : (
-            <p onClick={onClick2}>Sign Up</p>
+            <p onClick={onClick2}>Sign In</p>
           )}
         </li>
       </ul>

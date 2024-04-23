@@ -23,15 +23,7 @@ const Book = () => {
     service: '',
   });
 
-  const [places, setplaces] = useState([
-    { name: 'kasargod', value: 'kasargod' },
-    { name: 'kannur', value: 'kannur' },
-    { name: 'wayanad', value: 'wayanad' },
-    { name: 'kozhikod', value: 'kozhikod' },
-    { name: 'palakkad', value: 'palakkad' },
-    { name: 'thrissur', value: 'thrissur' },
-    { name: 'ernakulam', value: 'ernakulam' },
-  ]);
+  const [places, setplaces] = useState([]);
 
   const navigate = useNavigate();
   const fetchData = async () => {
@@ -47,6 +39,13 @@ const Book = () => {
       `http://localhost:4999/book/user/${getId()}`
     );
     setApps(response.data);
+  };
+  const fetchLocations = async () => {
+    const response = await axios.get('http://localhost:4999/location');
+   
+    setplaces( response.data.map(item => {
+      return { name: item.name, value: item._id };
+    }));
   };
 
   const onViewProfile = id => {
@@ -98,14 +97,15 @@ const Book = () => {
     setModal(false);
     onClick();
   };
-  // console.log(pgs);
+  console.log(pgs);
   // console.log(location);
   // console.log(category);
   console.log(book);
 
   useEffect(() => {
     fetchData();
-    fetchApp()
+    fetchApp();
+    fetchLocations();
   }, []);
 
   return (
@@ -125,7 +125,7 @@ const Book = () => {
               <div className="left">
                 {/* <img src="" alt="profile image" /> */}
                 <p>name:{item.name}</p>
-                <p>place:{item.place}</p>
+                <p>place:{item.place.name}</p>
                 <p>
                   price:
                   {item.service.map(cat => {
@@ -146,7 +146,7 @@ const Book = () => {
                     onReq(item._id, item.name);
                   }}
                 >
-                  {checkApp(item._id, category,apps) ? 'req sent' : 'send '}
+                  {checkApp(item._id, category, apps) ? 'req sent' : 'send '}
                 </Button>
                 <p
                   onClick={() => {
@@ -190,7 +190,6 @@ const Modal = ({ setModal, onClick, onChange }) => {
 
 const checkApp = (id, service, apps) => {
   try {
-   
     const newResponse = apps.filter(
       app =>
         app.photographer._id == id &&

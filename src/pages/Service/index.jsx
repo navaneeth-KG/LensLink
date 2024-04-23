@@ -79,6 +79,7 @@ const ServicePage = () => {
   // console.log(top3Photographers);
   console.log(posts);
 
+
   useEffect(() => {
     fetchService();
     fetchPhotographers();
@@ -118,7 +119,7 @@ const ServicePage = () => {
         top rated photographers in {service.name}
       </h2>
       <div className="top-3">
-        {top3Photographers.map(item => {
+        {top3Photographers!=0?top3Photographers.map(item => {
           return (
             <div className="top3-card">
               <h1>{item.pg.name}</h1>
@@ -132,11 +133,15 @@ const ServicePage = () => {
               </p>
             </div>
           );
-        })}
+        }):<p style={{color:'white',textAlign:'center'}}>no photographers rated in this category</p>}
       </div>
+
+{      <button   onClick={() => {
+          navigate(`/service/details/pglist/${id}`);
+        }}>view all</button>}
       <h2>Gallery</h2>
       <div className="gallery">
-        {posts.map(item => {
+        {posts.length!=0?posts.map(item => {
           return (
             <div
               className="gallery-image"
@@ -147,17 +152,17 @@ const ServicePage = () => {
                 width: '200px',
                 height: '200px',
               }}
-            ></div>
+            ><i class="fa-solid fa-heart" style={{color:'red'}}></i><p style={{display:'inline',background:'white'}}>{item.likes.count}</p></div>
           );
-        })}
+        }):<p style={{color:'white'}}>no photos to show</p>}
       </div>
-      <button
+    { posts.length==6?( <button
         onClick={() => {
           navigate(`/service/details/gallery/${id}`);
         }}
       >
-        show all
-      </button>
+        view all
+      </button>):''}
     </div>
   );
 };

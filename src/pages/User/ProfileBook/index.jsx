@@ -26,7 +26,7 @@ const ProfileBook = () => {
     setPg(response.data);
     setService(
       response.data.service.map(item => {
-        return { name: item.service.name, value: item.service._id };
+        return { name: item.service.name, value: item.service._id ,price:item.price};
       })
     );
   };
@@ -56,7 +56,7 @@ const ProfileBook = () => {
         <h1>{pg.portfolio ? pg.portfolio : ''}</h1>
         <ul>
           {service.map(item => {
-            return <li>{item.name}</li>;
+            return <li>{item.name},starting from Rs{item.price}</li>;
           })}
         </ul>
       </div>

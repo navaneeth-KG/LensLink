@@ -1,0 +1,25 @@
+.post-modal{
+    background-color: rgba(0, 0, 0,0.5);
+    width: 100%;
+    height: 100vh;
+    position :absolute;
+    top:0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+}
+
+.image-container{
+    width: 50%;
+    height: 70%;
+    /* border: 2px solid red; */
+    background-color: aliceblue;
+    
+}
+/* .outer-cont{
+
+    width: fit-content;
+    height: fit-content;
+    background-color: rgb(255, 255, 255);
+} */

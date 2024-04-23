@@ -17,24 +17,24 @@ const SignUp = () => {
     confirmPassword: '',
     email: '',
   });
-  const [places, setplaces] = useState([
-    { name: 'kasargod', value: 'kasargod' },
-    { name: 'kannur', value: 'kannur' },
-    { name: 'wayanad', value: 'wayanad' },
-    { name: 'kozhikod', value: 'kozhikod' },
-    { name: 'palakkad', value: 'palakkad' },
-    { name: 'thrissur', value: 'thrissur' },
-    { name: 'ernakulam', value: 'ernakulam' },
-  ]);
+  const [places, setplaces] = useState([]);
 
-//   const fetchData = async () => {
-//     const response = await axios.get('http://localhost:4999/service');
-//     setServices(
-//       response.data.map(item => {
-//         return { value: item._id, name: item.name };
-//       })
-//     );
-//   };
+  //   const fetchData = async () => {
+  //     const response = await axios.get('http://localhost:4999/service');
+  //     setServices(
+  //       response.data.map(item => {
+  //         return { value: item._id, name: item.name };
+  //       })
+  //     );
+  //   };
+
+  const fetchLocations = async () => {
+    const response = await axios.get('http://localhost:4999/location');
+    response.data.map(item => {
+      return { name: item.name, value: item._id };
+    });
+    setplaces(response.data)
+  };
 
   const onInpChange = async (e, key) => {
     if (key == 'image') {
@@ -50,15 +50,15 @@ const SignUp = () => {
     }
   };
 
-  const onSignUp=async()=>{
-    await axios.post('http://localhost:4999/photographer/signup',pg)
-  }
+  const onSignUp = async () => {
+    await axios.post('http://localhost:4999/photographer/signup', pg);
+  };
 
   console.log(pg);
 
-//   useEffect(() => {
-//     fetchData();
-//   }, []);
+    useEffect(() => {
+      fetchLocations();
+    }, []);
   return (
     <div className="pg-signup">
       <div className="pg-signup-form">
@@ -116,7 +116,7 @@ const SignUp = () => {
           }}
         />
         <Button onClick={onSignUp}>sign up</Button>
-        <Link to='/photographer/login'>have an account?sign in</Link>
+        <Link to="/photographer/login">have an account?sign in</Link>
       </div>
     </div>
   );

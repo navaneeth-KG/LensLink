@@ -88,11 +88,12 @@ const Profile = () => {
         <div className="pg-profile">
           <p>{pg.name}</p>
           <p>{pg.email}</p>
-          <p>{pg.place}</p>
+          {pg.place && <p>{pg.place.name}</p>}
           <div className="service-cont">
-            {pg.service&&pg.service.map(item => {
-              return <div className="service-card" >{item.service.name}</div>;
-            })}
+            {pg.service &&
+              pg.service.map(item => {
+                return <div className="service-card">{item.service.name}</div>;
+              })}
           </div>
 
           <Button

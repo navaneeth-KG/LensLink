@@ -3,6 +3,9 @@ import Button from '../../components/Button';
 import { useNavigate } from 'react-router-dom';
 import './style.css';
 import Footer from '../../components/Footer';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+
 const images = [
   '/baby.jpg',
   '/prewedding.jpg',
@@ -13,7 +16,18 @@ const images = [
   '/frame.jpg',
 ];
 
+
+
 const Home = () => {
+
+  const [categoryImgs,setCategoryImgs]=useState([])
+  const fetchServices=async()=>{
+    const response= await axios.get('http://localhost:4999/service')
+    response.data.slice(0,7)
+    const doubledata=[...response.data,...response.data]
+    setCategoryImgs(doubledata)
+  
+  }
   const Navigate = useNavigate();
   const onBook = () => {
     Navigate('/user/book');
@@ -24,6 +38,7 @@ const Home = () => {
   const cta2=()=>{
     Navigate('/user/book')
   }
+  useEffect(()=>{fetchServices()},[])
   return (
     <div className="home">
       <div className="home-header">
@@ -47,15 +62,16 @@ const Home = () => {
 
         <div className="slider-container">
           <div className="slider">
-            {[...images, ...images].map((image, idx) => {
+            {categoryImgs.map((item, idx) => {
               return (
                 <div
                   className="img-div"
                   key={idx}
-                  style={{ backgroundImage: `url(${image})` }}
+                  style={{ backgroundImage: `url(${item.image})` }}
+                  
                 >
                   <div className="overlay">
-                    <Button>explore</Button>
+                    <Button onClick={()=>{Navigate(`/service/details/${item._id}`)}}>explore</Button>
                   </div>
                 </div>
               );

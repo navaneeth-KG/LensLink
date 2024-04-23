@@ -13,7 +13,7 @@
 }
 .top-3{
     display: flex;
-    height: 50vh;
+    height: fit-content;
     width: 100%;
     /* border:2px solid red; */
     gap:20px;
