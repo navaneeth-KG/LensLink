@@ -20,7 +20,7 @@ const Footer = () => {
       <div className="options">
         <p>report an issue</p>
         <p>about us</p>
-        <p>sservices</p>
+        <p>services</p>
       </div>
       <p className="copyright">© 2024 LensLink</p>
     </div>

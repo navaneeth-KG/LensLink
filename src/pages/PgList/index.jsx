@@ -40,6 +40,7 @@ const PgList = () => {
     <div className="pg-list">
       <Select
         placeholder="filter by your location"
+        className="select"
         array={places}
         onChange={fetchPgsByLoc}
       />

@@ -14,41 +14,27 @@
   background-color: black;
   color: white;
   min-height: 100vh;
+  padding: 20px;
 
 }
 .post-btn {
   background-color: rgb(74, 74, 215);
   position: absolute;
   right: 10px;
-  top: 100px;
+  top: 180px;
 }
-.post-modal {
-  position: absolute;
-  margin-left: auto;
-  margin-right: auto;
-  left: 0;
-  right: 0;
-  top: 100px;
-  padding: 30px;
-  /* text-align: center */
-}
-.modal-container {
-  height: 100vh;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  position: absolute;
-  top:0
-}
-.posts-container{
+
+.posts-box{
     background-color:rgb(43, 41, 41);
     width: 90%;
-    height: fit-content;
+    min-height: 100px;
     padding: 20px;
-    margin: 20px auto 0;
+    margin: 20px auto;
     border-radius: 10px;
     display: flex;
     flex-wrap: wrap;
-    gap:5px
+    gap:5px;
+    /* justify-content: center; */
 
 }
 .post-image{
@@ -59,6 +45,15 @@
     background-size: cover;
     /* border: 1px solid red; */
     
+}
+.post-image .like-container{
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background-color: rgba(255, 255, 255,0.5);
+  width: fit-content;
+  border-radius: 5px;
+  padding: 5px;
 }
 
 /* .post-image:hover{

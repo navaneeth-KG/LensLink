@@ -1,6 +1,6 @@
 .user-login {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   height: 89.6vh;
   width: 100%;
@@ -18,7 +18,7 @@
 }
 
 .user-login-form {
-  /* border: 3px solid greenyellow; */
+
   width: fit-content;
   display: flex;
   flex-direction: column;
@@ -29,9 +29,9 @@
   width: 400px;
 }
 .form-container {
-  /* border: 1px solid red; */
+  border-radius: 5px;
   width: fit-content;
-  background-color: rgb(33, 33, 33);
+  background-color: rgb(208, 208, 208);
 }
 .options{
     color: aliceblue;

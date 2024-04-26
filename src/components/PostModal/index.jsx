@@ -2,10 +2,8 @@ import React from 'react';
 import './style.css';
 import { useNavigate } from 'react-router-dom';
 
-
 const PostModal = ({ post, setState }) => {
   const navigate = useNavigate();
-
 
   return (
     <div className="post-modal">
@@ -33,22 +31,27 @@ const PostModal = ({ post, setState }) => {
           backgroundPosition: 'center',
         }}
       >
-        <p>posted by:{post.photographer.name}</p>
-        <p
-          onClick={() => {
-            navigate(`/user/pgprofile/${post.photographer._id}`);
-          }}
-        >
-          view profile
+        <div className="info">
+          {' '}
+          <p>posted by:{post.photographer.name}</p>
+          <p
+            onClick={() => {
+              navigate(`/user/pgprofile/${post.photographer._id}`);
+            }}
+            style={{cursor:'pointer'}}
+          >
+            view profile
+          </p>
+        
+
+        <i
+          class="fa-solid fa-heart"
+          
+        ></i>
+        <p style={{ display: 'inline' }}>
+          {post.likes.count}
         </p>
-            <i
-              class="fa-solid fa-heart"
-              style={{ color: 'red', background: 'white' }}
-            ></i>
-            <p style={{ display: 'inline', background: 'white' }}>
-              {post.likes.count}
-            </p>
-       
+        </div>
       </div>
     </div>
   );

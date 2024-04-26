@@ -2,7 +2,7 @@
     background-color: rgba(0, 0, 0,0.5);
     width: 100%;
     height: 100vh;
-    position :absolute;
+    position :fixed;
     top:0;
     display: flex;
     justify-content: center;
@@ -15,11 +15,19 @@
     height: 70%;
     /* border: 2px solid red; */
     background-color: aliceblue;
+    position: relative
     
 }
-/* .outer-cont{
-
+.image-container .info{
+    background-color: rgb(0, 0, 0,0.2);
+    border-radius: 5px;
     width: fit-content;
-    height: fit-content;
-    background-color: rgb(255, 255, 255);
-} */
+    position: absolute;
+    bottom:10px;
+    left: 10px;
+    padding: 10px;
+    color: rgb(255, 255, 255,0.5);
+}
+.info i{
+    margin-right: 5px;
+}

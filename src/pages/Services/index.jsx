@@ -20,29 +20,31 @@ const Services = () => {
   return (
     <>
       {services.length != 0 ? (
-        <div className="service">
-          <h1>
-            Explore a world of photography possibilities tailored just for you,
-            with LensLink's diverse range of services.
-          </h1>
-          <h2>services we offer</h2>
-          <div className="services-container">
-            {services.map(item => {
-              return (
-                <div
-                  className="services-image"
-                  onClick={() => {
-                    onClick(item._id);
-                  }}
-                  style={{ backgroundImage: `url(${item.image})` }}
-                >
-                  <p className="services-name">{item.name}</p>
-                </div>
-              );
-            })}
+        <>
+          <div className="service">
+            <h1>
+              Explore a world of photography possibilities tailored just for
+              you,<br/> with LensLink's diverse range of services.
+            </h1>
+            
+            <div className="services-container">
+              {services.map(item => {
+                return (
+                  <div
+                    className="services-image"
+                    onClick={() => {
+                      onClick(item._id);
+                    }}
+                    style={{ backgroundImage: `url(${item.image})` }}
+                  >
+                    <p className="services-name">{item.name}</p>
+                  </div>
+                );
+              })}
+            </div>
           </div>
           <Footer />
-        </div>
+        </>
       ) : (
         <Loading />
       )}

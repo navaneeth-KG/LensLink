@@ -108,15 +108,21 @@ const SignUp = () => {
             onInpChange(e, 'confirmPassword');
           }}
         />
-
+        <label htmlFor="profiepic" style={{color:'gray'}}>upload your image</label>
         <Input
           type="file"
+          id="profilepic"
+          className='profilepic-inp'
           onChange={e => {
             onInpChange(e, 'image');
           }}
         />
+        <div className="signup-btn-div">
+        <Link to="/photographer/login"><p style={{fontSize:'12px'}}>alredy have an account?signin</p></Link>
         <Button onClick={onSignUp}>sign up</Button>
-        <Link to="/photographer/login">have an account?sign in</Link>
+        
+        </div>
+       
       </div>
     </div>
   );

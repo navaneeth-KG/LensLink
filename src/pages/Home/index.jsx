@@ -5,47 +5,66 @@ import './style.css';
 import Footer from '../../components/Footer';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { color } from 'framer-motion';
 
-const images = [
-  '/baby.jpg',
-  '/prewedding.jpg',
-  '/wedding.jpg',
-  '/studio.jpg',
-  '/video.jpg',
-  '/product.jpg',
-  '/frame.jpg',
+const imageSlides = [
+  {
+    url: '/homeImage.jpg',
+    description:
+      'Explore Exceptional Photographers Perfect Moments, Every Occasion',
+  },
+  {
+    url: '/homeImage2.jpg',
+    description:
+      "Discover the artistry of photography with LensLink's talented community of photographers",
+  },
+  {
+    url: '/homeImage3.jpg',
+    description:
+      "Capture life's moments with LensLink – where every click tells a story.",
+  },
 ];
 
-
-
 const Home = () => {
-
-  const [categoryImgs,setCategoryImgs]=useState([])
-  const fetchServices=async()=>{
-    const response= await axios.get('http://localhost:4999/service')
-    response.data.slice(0,7)
-    const doubledata=[...response.data,...response.data]
-    setCategoryImgs(doubledata)
-  
-  }
+  const [categoryImgs, setCategoryImgs] = useState([]);
+  const [state, setState] = useState(1);
+  const fetchServices = async () => {
+    const response = await axios.get('http://localhost:4999/service');
+    response.data.slice(0, 7);
+    const doubledata = [...response.data, ...response.data];
+    setCategoryImgs(doubledata);
+  };
   const Navigate = useNavigate();
   const onBook = () => {
     Navigate('/user/book');
   };
-  const cta=()=>{
-    Navigate('/photographer/signup')
-  }
-  const cta2=()=>{
-    Navigate('/user/book')
-  }
-  useEffect(()=>{fetchServices()},[])
+  const cta = () => {
+    Navigate('/photographer/signup');
+  };
+  const cta2 = () => {
+    Navigate('/user/book');
+  };
+  useEffect(() => {
+    fetchServices();
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (state == 2) {
+        setState(0);
+      } else {
+        setState(state + 1);
+      }
+    }, 5000);
+    return () => setTimeout(timer);
+  }, [state]);
   return (
     <div className="home">
-      <div className="home-header">
-        <h1>
-          Discover Amazing Photographers
-          <br /> for Every Occasion in Kerala.
-        </h1>
+      <div
+        className="home-header"
+        style={{ backgroundImage: `url(${imageSlides[state].url})` }}
+      >
+        <h1 style={{color:imageSlides[state]==imageSlides[0]?'black':'white'}}>{imageSlides[state].description}</h1>
         <Button className="book-btn" onClick={onBook}>
           Book now
         </Button>
@@ -59,6 +78,7 @@ const Home = () => {
           />
           <Button className="search-btn">search</Button>
         </div> */}
+        <h1>explore categories and discover your perfect match</h1>
 
         <div className="slider-container">
           <div className="slider">
@@ -68,10 +88,15 @@ const Home = () => {
                   className="img-div"
                   key={idx}
                   style={{ backgroundImage: `url(${item.image})` }}
-                  
                 >
                   <div className="overlay">
-                    <Button onClick={()=>{Navigate(`/service/details/${item._id}`)}}>explore</Button>
+                    <Button
+                      onClick={() => {
+                        Navigate(`/service/details/${item._id}`);
+                      }}
+                    >
+                      explore
+                    </Button>
                   </div>
                 </div>
               );
@@ -81,23 +106,23 @@ const Home = () => {
       </div>
       <div className="cta-section">
         <h1>
-          Ready to Showcase Your Talent? Join Our Community of Photographers
-          Today!
+          Ready to showcase your talent? Join our community of photographers
+          today!
         </h1>
-        <Button className="join" onClick={cta}>Join as Photographer</Button>
+        <Button className="join" onClick={cta}>
+          Join as Photographer
+        </Button>
       </div>
       <div className="home-about">
-        <p>
-          Discover exceptional photographers for every occasion. From weddings
-          to commercial shoots, our platform connects you with top-tier talent
-          ready to capture your unique story. Join our vibrant community today
+        <h1>
+          Join our vibrant community today
           and let's turn your moments into timeless memories
-        </p>
-        <Button className="join" onClick={cta2}>Book a Photographer</Button>
+        </h1>
+        <Button className="join" onClick={cta2}>
+          Book a Photographer
+        </Button>
       </div>
-      <Footer/>
-
-
+      <Footer />
     </div>
   );
 };

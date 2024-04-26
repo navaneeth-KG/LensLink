@@ -23,10 +23,10 @@ const PgReview = () => {
           {reviews.map(item => {
             return (
               <div className="review-cont">
-                <StarView rating={item.rating}/>                
+                <StarView rating={item.rating} />
                 <p>{item.message}</p>
-                <p>posted by:{item.client.name}</p>
-                <p>service :{item.service}</p>
+                <p>service: {item.service.name}</p>
+                <p style={{fontSize:'12px'}}>posted by:{item.client.name}</p>
                 <p></p>
               </div>
             );

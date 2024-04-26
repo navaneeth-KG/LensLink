@@ -47,6 +47,7 @@ const Gallery = () => {
   return (
     <>
       {posts.length != 0 ? (
+        <>
         <div className="gallery-container">
           {state ? <PostModal post={post} setState={setState} /> : ''}
           {posts.length!=0?posts.map(item => {
@@ -64,13 +65,14 @@ const Gallery = () => {
                   handleDivClick(e, item);
                 }}
               >
+                <div className="like-container">
                 {item.likes.likedPeople.includes(getId()) ? (
                   <i
                     class="fa-solid fa-heart"
                     onClick={() => {
                       postDislike(item._id);
                     }}
-                    style={{ color: 'red', background: 'white' }}
+                    style={{ color: 'red'}}
                   ></i>
                 ) : (
                   <i
@@ -80,14 +82,16 @@ const Gallery = () => {
                     }}
                   ></i>
                 )}
-                <p style={{ display: 'inline', background: 'white' }}>
+                <p style={{ display: 'inline'}}>
                   {item.likes.count}
-                </p>
+                </p></div>
               </div>
             );
           }):<p>no posts yet</p>}
-          <Footer />
+          
         </div>
+        <Footer />
+        </>
       ) : (
         <Loading />
       )}

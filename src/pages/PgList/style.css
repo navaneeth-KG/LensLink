@@ -1,6 +1,28 @@
-.card{
-    height: fit-content;
-    width: 100%;
-    padding: 20px;
-    border-bottom:1px solid black
+.card {
+  height: fit-content;
+  width: 90%;
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: rgb(29, 28, 28);
+  color: white;
+}
+.card:hover{
+    scale: 0.99;
+}
+.pg-list {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 50px 0;
+  background-image: linear-gradient(to bottom, #2c2929, #555253, #818081, #b1b1b1, #e4e4e4);
+}
+
+.pg-list select {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  outline: none;
 }

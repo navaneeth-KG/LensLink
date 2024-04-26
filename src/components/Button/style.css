@@ -1,13 +1,16 @@
 .btn {
-  border: 2px solid white;
-  background-color: transparent;
+  /* border: 2px solid white; */
+  background-image: linear-gradient(to right, #02afff, #0095ff, #0077ff, #0052ff, #0b00ff);
   padding:  10px 10px;
   color: white;
   font-size: 20px;
+  border-radius: 10px;
+  border:none;
 }
 .btn:hover {
-  border: 2px solid white;
+  /* border: 2px solid white; */
+  border:none;
   background-color: white;
   cursor:pointer;
-  color: black;
+  scale: 0.98;
 }

@@ -17,6 +17,9 @@ import ServicePage from './pages/Service';
 import ProfileBook from './pages/User/ProfileBook';
 import Gallery from './pages/Gallery';
 import PgList from './pages/PgList';
+import PgEditProfile from './pages/Photographer/EditProfile';
+import CommonSignIn from './pages/SignIn';
+import UserProfile from './pages/User/Profile';
 
 const App = () => {
   return (
@@ -29,12 +32,15 @@ const App = () => {
         <Route path="/service/details/:id" element={<ServicePage />} />
         <Route path="/service/details/gallery/:id" element={<Gallery />} />
         <Route path="/service/details/pglist/:id" element={<PgList />} />
+        <Route path="/signin" element={<CommonSignIn/>} />
 
 
         <Route path="/photographer/login" element={<Login />} />
         <Route path="/photographer/profile" element={<Profile />} />
         <Route path="/photographer/signup" element={<SignUp />} />
         <Route path="/pg/mybooking" element={<PgBooking />} />
+        <Route path="/photographer/profile/edit/:id" element={<PgEditProfile />} />
+
 
 
         <Route path="/user/book" element={<Book />} />
@@ -43,6 +49,8 @@ const App = () => {
         <Route path="/user/mybooking/" element={<UserBookings />} />
         <Route path="/user/pg-review/:id" element={<PgReview />} />
         <Route path="/user/pgprofile/book/:id" element={<ProfileBook />} />
+        <Route path="/user/profile/" element={<UserProfile/>} />
+
       </Routes>
     </div>
   );

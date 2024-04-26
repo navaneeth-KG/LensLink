@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { getId } from './../../utils/index';
 
 const ServicePage = () => {
   const { id } = useParams();
@@ -79,6 +80,22 @@ const ServicePage = () => {
   // console.log(top3Photographers);
   console.log(posts);
 
+  const postLike = async postId => {
+    
+    const response = await axios.patch(
+      `http://localhost:4999/pg/post/${postId}/like/${getId()}`
+    );
+    fetchPosts();
+    if(!getId()){
+      alert('please login to like')
+    }
+  };
+  const postDislike = async postId => {
+    const response = await axios.patch(
+      `http://localhost:4999/pg/post/${postId}/unlike/${getId()}`
+    );
+    fetchPosts();
+  };
 
   useEffect(() => {
     fetchService();
@@ -102,7 +119,7 @@ const ServicePage = () => {
         className="header"
         style={{ backgroundImage: `url(${service.image})` }}
       >
-        <h1 style={{ fontSize: '60px' }}>{service.name}</h1>
+        <h1 >{service.name}</h1>
       </div>
       <h2
       // onClick={() => {
@@ -119,50 +136,92 @@ const ServicePage = () => {
         top rated photographers in {service.name}
       </h2>
       <div className="top-3">
-        {top3Photographers!=0?top3Photographers.map(item => {
-          return (
-            <div className="top3-card">
-              <h1>{item.pg.name}</h1>
-              <p>rating:{item.avgRating}</p>
-              <p
-                onClick={() => {
-                  navigate(`/user/pgprofile/${item.pg._id}`);
-                }}
-              >
-                view profile
-              </p>
-            </div>
-          );
-        }):<p style={{color:'white',textAlign:'center'}}>no photographers rated in this category</p>}
+        {top3Photographers != 0 ? (
+          top3Photographers.map(item => {
+            return (
+              <div className="top3-card">
+                <h1>{item.pg.name}</h1>
+                <p>rating:{item.avgRating}</p>
+                <p
+                style={{color:'#0095ff',cursor:'pointer'}}
+                  onClick={() => {
+                    navigate(`/user/pgprofile/${item.pg._id}`);
+                  }}
+                >
+                  view profile
+                </p>
+              </div>
+            );
+          })
+        ) : (
+          <p style={{ color: 'white', textAlign: 'center' }}>
+            no photographers rated in this category
+          </p>
+        )}
       </div>
 
-{      <button   onClick={() => {
-          navigate(`/service/details/pglist/${id}`);
-        }}>view all</button>}
-      <h2>Gallery</h2>
+      {
+        <button
+          onClick={() => {
+            navigate(`/service/details/pglist/${id}`);
+          }}
+        >
+          view all
+        </button>
+      }
+      <h2>gallery</h2>
       <div className="gallery">
-        {posts.length!=0?posts.map(item => {
-          return (
-            <div
-              className="gallery-image"
-              style={{
-                backgroundImage: `url(${item.image})`,
-                backgroundPosition: 'center',
-                backgroundSize: 'cover',
-                width: '200px',
-                height: '200px',
-              }}
-            ><i class="fa-solid fa-heart" style={{color:'red'}}></i><p style={{display:'inline',background:'white'}}>{item.likes.count}</p></div>
-          );
-        }):<p style={{color:'white'}}>no photos to show</p>}
+        {posts.length != 0 ? (
+          posts.map(item => {
+            return (
+              <div
+                className="gallery-image"
+                style={{
+                  backgroundImage: `url(${item.image})`,
+                  backgroundPosition: 'center',
+                  backgroundSize: 'cover',
+                  width: '200px',
+                  height: '200px',
+                }}
+              >
+                <div className="like-container">
+                  {' '}
+                  {item.likes.likedPeople.includes(getId()) ? (
+                    <i
+                      class="fa-solid fa-heart"
+                      style={{ color: 'red' }}
+                      onClick={() => {
+                        postDislike(item._id);
+                      }}
+                    ></i>
+                  ) : (
+                    <i
+                      class="fa-regular fa-heart"
+                      onClick={() => {
+                        postLike(item._id);
+                      }}
+                    ></i>
+                  )}
+                  <p style={{ display: 'inline' }}>{item.likes.count}</p>
+                </div>
+              </div>
+            );
+          })
+        ) : (
+          <p style={{ color: 'white' }}>no photos to show</p>
+        )}
       </div>
-    { posts.length==6?( <button
-        onClick={() => {
-          navigate(`/service/details/gallery/${id}`);
-        }}
-      >
-        view all
-      </button>):''}
+      {posts.length == 6 ? (
+        <button
+          onClick={() => {
+            navigate(`/service/details/gallery/${id}`);
+          }}
+        >
+          view all
+        </button>
+      ) : (
+        ''
+      )}
     </div>
   );
 };

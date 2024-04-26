@@ -1,0 +1,26 @@
+.user-profile{
+    min-height: 100vh;
+    background-color: rgb(244, 239, 239);
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-around;
+}
+.profile-pic-container{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
+    background-repeat:no-repeat
+}
+
+.user-details-editcontainer{
+    width: fit-content;
+    height: fit-content;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+    align-items: center;
+}

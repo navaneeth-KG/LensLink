@@ -1,14 +1,35 @@
 .pg-signup{
-    background-color: black;
+    background-color: rgb(28, 28, 28);
     height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .pg-signup-form{
-    background-color: rgb(52, 52, 52);
+    background-color:  rgb(208, 208, 208);
     width: fit-content;
     height: fit-content;
     display: flex;
     flex-direction: column;
     gap: 10px;
     padding: 20px;
+    border-radius: 5px;
+}
+.signup-btn-div{
+    display: flex;
+    justify-content: space-between;
+    width:100%;
+    color: white;
+}
+.profilepic-inp{
+    font-size: 12px;
+ 
+    font-family: 'Oswald', sans-serif;
+    padding: 0 ;
+    border-radius: 0;
+}
+.profilepic-inp:focus{
+    outline: none;
+   
 }

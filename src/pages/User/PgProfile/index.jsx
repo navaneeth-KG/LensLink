@@ -82,22 +82,36 @@ const PgProfile = () => {
     setRating(sum / avgReview.length);
   };
 
-  const onLike = async id => {
+  // const onLike = async id => {
+  //   const response = await axios.patch(
+  //     `http://localhost:4999/pg/post/${id}/like/${getId()}`
+  //   );
+  //   fetchPosts();
+  //   alert(response.data.message);
+  // };
+
+  // const onDisLike = async id => {
+  //   const response = await axios.patch(
+  //     `http://localhost:4999/pg/post/${id}/unlike/${getId()}`
+  //   );
+  //   fetchPosts();
+  //   alert(response.data.message);
+  // };
+  const postLike = async postId => {
     const response = await axios.patch(
-      `http://localhost:4999/pg/post/${id}/like/${getId()}`
+      `http://localhost:4999/pg/post/${postId}/like/${getId()}`
     );
     fetchPosts();
-    alert(response.data.message);
+    if (!getId()) {
+      alert('please login to like');
+    }
   };
-
-  const onDisLike = async id => {
+  const postDislike = async postId => {
     const response = await axios.patch(
-      `http://localhost:4999/pg/post/${id}/unlike/${getId()}`
+      `http://localhost:4999/pg/post/${postId}/unlike/${getId()}`
     );
     fetchPosts();
-    alert(response.data.message);
   };
-
   const serviceSelect = e => {
     setreview({ ...review, service: e.target.value });
   };
@@ -112,30 +126,36 @@ const PgProfile = () => {
       {pg.place ? (
         <div className="user-pg-profile">
           <div className="user-pg-profile-header">
-            <h1>{pg.name}</h1>
-            <p>{pg.place.name}</p>
-            <p>{pg.email}</p>
-            <p>
-              <i class="fa-solid fa-star"></i>
-              {rating}/5
-            </p>
+            <div className="left-side">
+              {' '}
+              <h1>{pg.name}</h1>
+              <p>{pg.place.name}</p>
+              <p>
+                <i class="fa-solid fa-star"></i>
+                {rating && rating.toFixed(2)}/5
+              </p>
+            </div>
+            <div className="right-side">
+             
+              <Button
+                onClick={() => {
+                  navigate(`/user/pgprofile/book/${id}`);
+                }}
+              >
+                Book
+              </Button>{' '}
+              <button onClick={postReview} style={{cursor:'pointer'}}>post a review</button>
+              <small
+              style={{cursor:'pointer'}}
+                onClick={() => {
+                  navigate(`/user/pg-review/${id}`);
+                }}
+              >
+                view all reviews
+              </small>
+            </div>
           </div>
 
-          <button onClick={postReview}>post a review</button>
-          <small
-            onClick={() => {
-              navigate(`/user/pg-review/${id}`);
-            }}
-          >
-            view all reviews
-          </small>
-          <Button
-            onClick={() => {
-              navigate(`/user/pgprofile/book/${id}`);
-            }}
-          >
-            Book
-          </Button>
           {view && (
             <ReviewModel
               onComment={onComment}
@@ -158,30 +178,26 @@ const PgProfile = () => {
                       position: 'relative',
                     }}
                   >
-                    <p
-                      style={{
-                        color: 'red',
-                        position: 'absolute',
-                        top: 0,
-                        right: 0,
-                      }}
-                    >
-                      {item.likes.count ? item.likes.count : '0'}
-                    </p>
-                    <i
-                      class="fa-solid fa-thumbs-up"
-                      style={{ cursor: 'pointer' }}
-                      onClick={() => {
-                        onLike(item._id);
-                      }}
-                    ></i>
-                    <i
-                      class="fa-solid fa-thumbs-down"
-                      style={{ cursor: 'pointer' }}
-                      onClick={() => {
-                        onDisLike(item._id);
-                      }}
-                    ></i>
+                    <div className="like-container">
+                      {' '}
+                      {item.likes.likedPeople.includes(getId()) ? (
+                        <i
+                          class="fa-solid fa-heart"
+                          style={{ color: 'red' }}
+                          onClick={() => {
+                            postDislike(item._id);
+                          }}
+                        ></i>
+                      ) : (
+                        <i
+                          class="fa-regular fa-heart"
+                          onClick={() => {
+                            postLike(item._id);
+                          }}
+                        ></i>
+                      )}
+                      <p style={{ display: 'inline' }}>{item.likes.count}</p>
+                    </div>
                   </div>
                 );
               })
@@ -210,7 +226,7 @@ const ReviewModel = ({
 }) => {
   return (
     <div className="review-modal">
-      <Input onChange={onComment} />
+      <Input onChange={onComment}  placeholder='type comment'/>
       <Select
         array={array}
         onChange={ratingSelect}
@@ -221,8 +237,9 @@ const ReviewModel = ({
         onChange={serviceSelect}
         placeholder="Select service "
       />
-      <Button onClick={ReviewPost}>post</Button>
+      <Button onClick={ReviewPost} >post</Button>
       <button
+      style={{width:'100px'}}
         onClick={() => {
           setView(false);
         }}

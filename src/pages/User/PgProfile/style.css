@@ -1,40 +1,63 @@
-.user-pg-profile-posts{
-    background-color: rgb(34, 32, 32);
-    height: fit-content;
-    padding: 20px;
-    display: flex;   
-    flex-wrap: wrap;
-    gap:5px;
-    margin-top: 30px;
-    justify-content: center
+.user-pg-profile-posts {
+  background-color: rgb(34, 32, 32);
+  width: 90%;
+  margin: 0 auto;
+  min-height: 50vh;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 30px;
+  justify-content: center;
 }
-.post{
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 200px;
-    width: 200px;
-    background-size: cover;
+.post {
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 200px;
+  width: 200px;
+  background-size: cover;
+  position: relative;
 }
-.user-pg-profile{
-
-    background-color: black;
-    color: wheat;
-    padding:20px;
-    min-height: 100vh;
-    
-
+.user-pg-profile {
+  background-color: black;
+  color: wheat;
+  padding: 20px;
+  min-height: 100vh;
 }
 
-.review-modal{
-    position: fixed;
-    z-index:2;
-    right: 0;
-    left:0;
-    margin: auto;
-    background-color: aliceblue;
-    width: fit-content;
-    height: fit-content;
-    background-color: rgb(92, 88, 88);
-    box-shadow: 0 0 10px 10px rgba(1, 1, 1, 0.3);
-    padding: 20px;
+.review-modal {
+  position: fixed;
+  z-index: 2;
+  right: 0;
+  left: 0;
+  margin: auto;
+  background-color: aliceblue;
+  width: fit-content;
+  height: fit-content;
+  background-color: rgb(92, 88, 88);
+  box-shadow: 0 0 10px 10px rgba(1, 1, 1, 0.3);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap:20px;
+}
+.user-pg-profile .like-container {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  color: black;
+  width: fit-content;
+  border-radius: 5px;
+  padding: 5px;
+}
+.user-pg-profile-header{
+    display: flex;
+    justify-content: space-between;
+}
+.right-side{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap:10px;
 }

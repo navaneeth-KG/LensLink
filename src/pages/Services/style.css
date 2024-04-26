@@ -5,10 +5,11 @@
   height: fit-content;
   justify-content: center;
   gap:20px;
+  padding: 30px 20px;
 }
 
 .services-image {
-  height: 300px;
+  height: 250px;
   width: 200px;
   background-size: cover;
   background-position: center;
@@ -19,27 +20,39 @@
   /* padding: 10px; */
   cursor: pointer;
   text-align: center;
+  box-shadow: 10px 10px 15px 3px rgba(0, 0, 0,0.4);
+ 
 
+}
+
+.service h1{
+  /* font-family: 'Dancing Script', cursive; */
+  font-size: 35px;
+  font-weight: 200;
 }
 .services-name{
     font-size: 24px;
     /* border: 2px solid white; */
-    color:white;
+    color:rgb(80, 182, 255);
     background-color: rgba(0, 0, 0,0.5);
     height: 100%;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items:center ;
+    border-radius: 5px;
 }
 .service{
-    background-color: black;
-    color: aliceblue;
+    /* background-color: rgb(32, 31, 31);
+     */  background-image: linear-gradient(to bottom, #222020, #555253, #818081, #b1b1b1, #e4e4e4);
+    color: rgb(255, 255, 255);
     padding: 20px;
 }
 
 .services-image:hover .services-name{
     background-color: rgba(0, 0, 0,0) ;
-    color: rgb(7, 7, 7);
+    color:rgb(0, 123, 255);
+    align-items: flex-start;
+    transition: 2s;
 
 }

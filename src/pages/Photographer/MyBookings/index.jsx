@@ -3,6 +3,7 @@ import { getId } from '../../../utils';
 import './style.css';
 import axios from 'axios';
 import Loading from '../../../components/Loading';
+import Button from './../../../components/Button/index';
 
 const PgBooking = () => {
   const [apps, setApps] = useState([]);
@@ -12,7 +13,7 @@ const PgBooking = () => {
     setApps(response.data);
   };
   const onConfirm = async (id, status) => {
-    if (status == 'REQUESTED'|| status=='CANCELLED') {
+    if (status == 'REQUESTED') {
       const response = await axios.patch(`http://localhost:4999/book/${id}`);
       alert(response.data.message);
       fetchApps();
@@ -25,11 +26,11 @@ const PgBooking = () => {
     }
   };
 
-  const onAppDel=async(id)=>{
+  const onAppDel = async id => {
     const response = await axios.delete(`http://localhost:4999/book/${id}`);
     alert(response.data.message);
-     fetchApps()
-  }
+    fetchApps();
+  };
   console.log(apps);
   useEffect(() => {
     fetchApps();
@@ -40,25 +41,41 @@ const PgBooking = () => {
         apps.map(item => {
           return (
             <div className="app-card">
-              <p>{item.client.name}</p>
-              <p>{item.client.contact}</p>
-              <p>{item.date}</p>
-              <p>{item.service.name}</p>
-              <h2>status {item.status}</h2>
-              <button
-                onClick={() => {
-                  onConfirm(item._id, item.status);
-                }}
-              >
-                {item.status == 'ACCEPTED' ? 'cancel' : 'confirm'}
-              </button>
-              {item.status=='CANCELLED'&&<button onClick={()=>{onAppDel(item._id)}}>delete</button>}
+              <div className="left">
+                {' '}
+                <p>{item.client.name}</p>
+                <p>{item.client.contact}</p>
+                <p>{item.date}</p>
+                <p>{item.service.name}</p>
+                <h2>status {item.status}</h2>
+              </div>
+              <div className="right">
+                {!(item.status == 'CANCELLED') && (
+                  <Button
+                    className="accept-btn"
+                    onClick={() => {
+                      onConfirm(item._id, item.status);
+                    }}
+                  >
+                    {item.status == 'REQUESTED' ? 'ACCEPT' : 'CANCEL'}
+                  </Button>
+                )}
+                {item.status == 'CANCELLED' && (
+                  <Button
+                    className="cancel-btn"
+                    onClick={() => {
+                      onAppDel(item._id);
+                    }}
+                  >
+                        DELETE
+                  </Button>
+                )}
+              </div>
             </div>
           );
         })
       ) : (
-        // <p style={{ margin: '0 auto' }}>no bookings</p>
-        <Loading/>
+        <p style={{ margin: '200px auto' }}>no bookings</p>
       )}
     </div>
   );

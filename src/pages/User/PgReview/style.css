@@ -2,9 +2,13 @@
     width: 100%;
     height: fit-content;
     padding: 20px;
-    border:2px solid red;
+    border-bottom:2px solid rgb(0, 0, 0);
 }
 .pg-review{
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
+}
+.fa-star{
+    color: rgb(59, 59, 253);
 }

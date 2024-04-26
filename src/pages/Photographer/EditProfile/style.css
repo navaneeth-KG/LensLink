@@ -1,0 +1,30 @@
+.pg-edit-profile{
+    min-height: 100vh;
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    gap:10px;
+    padding: 20px;
+}
+.services-select-cont{
+    display:flex ;
+    flex-direction: column;
+    width: 90%;
+    gap:10px;
+    
+
+}
+.service-select-card{
+    display:flex ;
+    border-bottom:1px solid black;
+    padding: 10px;
+    justify-content: space-between;
+   
+    /* flex-direction: column; */
+
+}
+.label{
+    width: 250px;
+    /* display: inline; */
+    /* border: 1px solid black; */
+}

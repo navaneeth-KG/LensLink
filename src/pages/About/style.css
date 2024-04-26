@@ -9,7 +9,7 @@
     color: rgb(240, 242, 244);
 }
 .about span{
-    color: aqua;
+    color: rgb(0, 132, 255);
 }
 .about-cta{
     height: 80px;
@@ -22,4 +22,7 @@
 }
 .about-btn{
     color: aqua;
+}
+.about ul {
+    list-style: none;
 }

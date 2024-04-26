@@ -1,7 +1,7 @@
 .footer{
     width: 100%;
     height: 40vh;
-    background-color: black;
+    background-color:rgb(97, 96, 96);
   }
   
   .fa-brands{
@@ -29,4 +29,17 @@
   .copyright{
     font-size: 10px;
     color: gray;
+  }
+
+  .fa-instagram:hover{
+    color: rgb(255, 0, 157);
+  }
+
+  .fa-facebook-f:hover{
+    color: blue;
+  }
+
+  .fa-x-twitter:hover{
+    color: black;
+
   }

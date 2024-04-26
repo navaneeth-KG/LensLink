@@ -14,6 +14,7 @@ const UserLogin = () => {
     contact: '',
     password: '',
     confirmPassword: '',
+    image:''
   });
   const [signIn, setSignIn] = useState({
     email: '',
@@ -27,7 +28,18 @@ const UserLogin = () => {
     setLogin(false);
   };
 
-  const signUpChange = (e, key) => {
+  const signUpChange = async(e, key) => {
+    if(key=='image'){
+    
+        const formdata = new FormData();
+        formdata.append('file', e.target.files[0]);
+        const response = await axios.post(
+          'http://localhost:4999/image',
+          formdata
+        );
+        setSignUp({ ...signUp, image: response.data.url });
+      
+    }
     setSignUp({ ...signUp, [key]: e.target.value });
   };
   const signInChange = (e, key) => {
@@ -60,7 +72,7 @@ const UserLogin = () => {
             style={
               login
                 ? {
-                    color: 'red',
+                    color: 'blue',
                     textDecoration: 'underline',
                     cursor: 'pointer',
                   }
@@ -75,7 +87,7 @@ const UserLogin = () => {
               login
                 ? { color: '', cursor: 'pointer' }
                 : {
-                    color: 'red',
+                    color: 'blue',
                     textDecoration: 'underline',
                     cursor: 'pointer',
                   }
@@ -139,6 +151,8 @@ const UserLogin = () => {
                 signUpChange(e, 'confirmPassword');
               }}
             />
+            <label htmlFor='dp' style={{color:'grey'}}>upload your image</label>
+            <Input type='file' className='profilepic-inp' onChange={e=>signUpChange(e,'image')} id='dp'/>
             <Button onClick={signUpClick}>sign up</Button>
           </div>
         )}

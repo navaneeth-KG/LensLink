@@ -4,12 +4,14 @@ import Loading from '../../../components/Loading';
 import Button from '../../../components/Button';
 import Modal from '../../../components/Modal';
 import { getId } from '../../../utils';
+import { useNavigate } from 'react-router-dom';
 import './style.css';
 
 const Profile = () => {
   const [pg, setPg] = useState({});
   const [loading, setLoading] = useState(true);
   const [isOpen, SetIsOpen] = useState(false);
+  const navigate = useNavigate();
   const [post, setPost] = useState({
     image: '',
     caption: '',
@@ -55,22 +57,17 @@ const Profile = () => {
     SetIsOpen(false);
   };
 
-  const onLike = async id => {
+  const postLike = async postId => {
     const response = await axios.patch(
-      `http://localhost:4999/pg/post/${id}/like/${getId()}`
+      `http://localhost:4999/pg/post/${postId}/like/${getId()}`
     );
-
     fetchData2();
-    alert(response.data.message);
   };
-
-  const onDisLike = async id => {
+  const postDislike = async postId => {
     const response = await axios.patch(
-      `http://localhost:4999/pg/post/${id}/unlike/${getId()}`
+      `http://localhost:4999/pg/post/${postId}/unlike/${getId()}`
     );
-
     fetchData2();
-    alert(response.data.message);
   };
   useEffect(() => {
     fetchData();
@@ -86,7 +83,7 @@ const Profile = () => {
         <Loading />
       ) : (
         <div className="pg-profile">
-          <p>{pg.name}</p>
+          <h2>{pg.name}</h2>
           <p>{pg.email}</p>
           {pg.place && <p>{pg.place.name}</p>}
           <div className="service-cont">
@@ -94,6 +91,27 @@ const Profile = () => {
               pg.service.map(item => {
                 return <div className="service-card">{item.service.name}</div>;
               })}
+          </div>
+          <button
+            onClick={() => {
+              navigate(`/photographer/profile/edit/${getId()}`);
+            }}
+          >
+            edit profile
+          </button>
+          <div className="modal-container">
+            {' '}
+            {isOpen && (
+              <Modal
+                onClick={() => {
+                  SetIsOpen(false);
+                }}
+                post={post}
+                setPost={setPost}
+                onPost={onPost}
+                category={category}
+              />
+            )}
           </div>
 
           <Button
@@ -104,59 +122,44 @@ const Profile = () => {
           >
             post a photo
           </Button>
-          {isOpen && (
-            <div className="modal-container">
-              <Modal
-                className="post-modal"
-                onClick={() => {
-                  SetIsOpen(false);
-                }}
-                post={post}
-                setPost={setPost}
-                onPost={onPost}
-                category={category}
-              />
-            </div>
-          )}
 
-          <div className="posts-container">
-            {posts.map(item => {
-              return (
-                <div
-                  key={item._id}
-                  className="post-image"
-                  style={{
-                    backgroundImage: `url(${item.image})`,
-                    position: 'relative',
-                  }}
-                >
-                  <p
+          <div className="posts-box">
+            {posts.length != 0 ? (
+              posts.map(item => {
+                return (
+                  <div
+                    key={item._id}
+                    className="post-image"
                     style={{
-                      color: 'red',
-                      position: 'absolute',
-                      top: 0,
-                      right: 0,
+                      backgroundImage: `url(${item.image})`,
+                      position: 'relative',
                     }}
                   >
-                    {item.likes.count ? item.likes.count : '0'}
-                  </p>
-                  <i
-                    class="fa-solid fa-thumbs-up"
-                    style={{ cursor: 'pointer' }}
-                    onClick={() => {
-                      onLike(item._id);
-                    }}
-                  ></i>
-                  <i
-                    class="fa-solid fa-thumbs-down"
-                    style={{ cursor: 'pointer' }}
-                    onClick={() => {
-                      onDisLike(item._id);
-                    }}
-                  ></i>
-                </div>
-              );
-            })}
+                    <div className="like-container">
+                      {item.likes.likedPeople.includes(getId()) ? (
+                        <i
+                          class="fa-solid fa-heart"
+                          onClick={() => {
+                            postDislike(item._id);
+                          }}
+                          style={{ color: 'red' }}
+                        ></i>
+                      ) : (
+                        <i
+                          class="fa-regular fa-heart"
+                          onClick={() => {
+                            postLike(item._id);
+                          }}
+                        ></i>
+                      )}
+                      <p style={{ display: 'inline' }}>{item.likes.count}</p>
+                    </div>
+                  </div>
+                );
+              })
+            ) : (
+              <p>no posts yet</p>
+            )}
           </div>
         </div>
       )}

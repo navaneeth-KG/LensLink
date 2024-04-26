@@ -1,15 +1,39 @@
 .service-page{
     width: 100%;
     min-height: 100vh;
-    background-color: black;
+    /* background-color: rgb(228, 228, 228);
+     */  background-image: linear-gradient(to bottom, #2c2929, #555253, #818081, #b1b1b1, #e4e4e4);
+    padding-bottom: 20px;
 }
 .service-page .header{
     height: 300px;
     background-position: center;
     background-size: cover;
+    padding: 20px;
+}
+.service-page .header h1{
+   font-size: 80px;
+   color: rgb(5, 79, 198);
+   -webkit-text-stroke:2px #e5e7e8;
+   font-weight: 400;
+ 
 }
 .service-page h2{
-    color: aliceblue;
+    color: black;
+    /* font-family: 'Dancing Script', cursive;  */
+    font-weight: 400;
+    margin:20px;
+}
+
+.service-page button {
+
+    background-color: blue;
+    color: white;
+    margin:0 20px;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: gray;
 }
 .top-3{
     display: flex;
@@ -22,7 +46,7 @@
 .top3-card{
     height: fit-content;
     width: fit-content;
-    background-color: rgb(27, 26, 26);
+    background-color: rgb(46, 43, 43,0.6);
     color: white;
     border-radius: 5px;
     padding:30px
@@ -30,8 +54,33 @@
 }
 .gallery{
     display: flex;
-    padding: 10px;
+    padding: 20px;
     justify-content: center;
     gap:10px
 
 }
+
+.gallery-image {
+    position: relative;
+}
+.gallery-image .like-container{
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background-color: rgba(255, 255, 255,0.5);
+  
+    width: fit-content;
+    border-radius: 5px;
+    padding: 5px;
+}
+.like-container p {
+    font-size: 16px;
+    margin-left: 5px;
+   
+}
+.like-container i {
+  cursor: pointer;
+   
+}
+
+
