@@ -6,6 +6,10 @@
   height: 80vh;
   padding: 20px;
   position: relative;
+  
+}
+.home{
+  margin-top: 60px;
 }
 .home-header h1 {
   font-size: 50px;
@@ -169,8 +173,4 @@
 .home-about h1 {
   letter-spacing: 2px;
   font-size: 35px;
-}
-.join {
-  color: aqua;
-  border: 2px solid aqua;
 }

@@ -2,8 +2,9 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding: 20px 0;
+    padding: 80px 20px 20px;
     gap: 10px;
+    
     background-image: linear-gradient(to bottom, #2c2929, #555253, #818081, #b1b1b1, #e4e4e4);
     min-height: 100vh;
 

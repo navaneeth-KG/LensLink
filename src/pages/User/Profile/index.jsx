@@ -46,7 +46,7 @@ const UserProfile = () => {
         <div
           className="profile-pic-container"
           style={{
-            backgroundImage: user.image ? `url(${user.image})` : '/user.jpg',
+            backgroundImage: user.image ? `url(${user.image})` : 'url(/user.jpg)',
           }}
         ></div>
         <h2>{user.name}</h2>

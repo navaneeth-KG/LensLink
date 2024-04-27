@@ -47,6 +47,7 @@
      */  background-image: linear-gradient(to bottom, #222020, #555253, #818081, #b1b1b1, #e4e4e4);
     color: rgb(255, 255, 255);
     padding: 20px;
+    margin-top: 60px;
 }
 
 .services-image:hover .services-name{

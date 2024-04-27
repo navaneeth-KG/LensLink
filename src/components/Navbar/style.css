@@ -7,6 +7,9 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 20px;
+  position: fixed;
+  top:0;
+  z-index: 10;
 
 }
 .logo {
@@ -34,6 +37,7 @@
   color: rgb(235, 235, 235);
   border-radius: 5px;
   z-index: 3;
+  box-shadow: 2px 2px 5px 5px rgba(231, 230, 230, 0.4);
 }
 .drop-down-cont p:hover {
   background-color: rgb(114, 114, 114);

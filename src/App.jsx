@@ -20,6 +20,7 @@ import PgList from './pages/PgList';
 import PgEditProfile from './pages/Photographer/EditProfile';
 import CommonSignIn from './pages/SignIn';
 import UserProfile from './pages/User/Profile';
+import PrivateRoute from './components/PrivateRoute';
 
 const App = () => {
   return (
@@ -32,25 +33,36 @@ const App = () => {
         <Route path="/service/details/:id" element={<ServicePage />} />
         <Route path="/service/details/gallery/:id" element={<Gallery />} />
         <Route path="/service/details/pglist/:id" element={<PgList />} />
-        <Route path="/signin" element={<CommonSignIn/>} />
-
-
+        <Route path="/signin" element={<CommonSignIn />} />
         <Route path="/photographer/login" element={<Login />} />
-        <Route path="/photographer/profile" element={<Profile />} />
         <Route path="/photographer/signup" element={<SignUp />} />
-        <Route path="/pg/mybooking" element={<PgBooking />} />
-        <Route path="/photographer/profile/edit/:id" element={<PgEditProfile />} />
-
-
-
         <Route path="/user/book" element={<Book />} />
         <Route path="/user/pgprofile/:id" element={<PgProfile />} />
         <Route path="/user/login/" element={<UserLogin />} />
-        <Route path="/user/mybooking/" element={<UserBookings />} />
         <Route path="/user/pg-review/:id" element={<PgReview />} />
-        <Route path="/user/pgprofile/book/:id" element={<ProfileBook />} />
-        <Route path="/user/profile/" element={<UserProfile/>} />
 
+        <Route
+          element={
+            <PrivateRoute role="photographer" path="/photographer/login" />
+          }
+        >
+          <Route path="/photographer/profile" element={<Profile />} />
+          <Route path="/pg/mybooking" element={<PgBooking />} />
+          <Route
+            path="/photographer/profile/edit/:id"
+            element={<PgEditProfile />}
+          />
+        </Route>
+        <Route
+          element={
+            <PrivateRoute role="user" path="/user/login" />
+          }
+        >
+          {' '}
+          <Route path="/user/mybooking/" element={<UserBookings />} />
+          <Route path="/user/pgprofile/book/:id" element={<ProfileBook />} />
+          <Route path="/user/profile/" element={<UserProfile />} />
+        </Route>
       </Routes>
     </div>
   );
