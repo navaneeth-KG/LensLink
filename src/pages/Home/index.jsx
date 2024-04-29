@@ -1,11 +1,11 @@
-import Input from '../../components/Input';
+
 import Button from '../../components/Button';
 import { useNavigate } from 'react-router-dom';
 import './style.css';
 import Footer from '../../components/Footer';
-import axios from 'axios';
+import axios from '../../utils/axios';
 import { useEffect, useState } from 'react';
-import { color } from 'framer-motion';
+
 
 const imageSlides = [
   {
@@ -29,7 +29,7 @@ const Home = () => {
   const [categoryImgs, setCategoryImgs] = useState([]);
   const [state, setState] = useState(1);
   const fetchServices = async () => {
-    const response = await axios.get('http://localhost:4999/service');
+    const response = await axios.get('/service');
     response.data.slice(0, 7);
     const doubledata = [...response.data, ...response.data];
     setCategoryImgs(doubledata);

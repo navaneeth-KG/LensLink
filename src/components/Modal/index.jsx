@@ -1,6 +1,6 @@
 import './style.css';
 import Button from '../Button';
-import axios from 'axios';
+import axios from '../../utils/axios';
 import Select from '../Select';
 const Modal = ({ className, onClick, post, setPost, onPost, category }) => {
   const onChange = async (e, key) => {
@@ -8,7 +8,7 @@ const Modal = ({ className, onClick, post, setPost, onPost, category }) => {
       const formdata = new FormData();
       formdata.append('file', e.target.files[0]);
       const response = await axios.post(
-        'http://localhost:4999/image',
+        '/image',
         formdata
       );
       setPost({ ...post, image: response.data.url });

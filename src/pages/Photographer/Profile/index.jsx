@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios from '../../../utils/axios';
 import Loading from '../../../components/Loading';
 import Button from '../../../components/Button';
 import Modal from '../../../components/Modal';
@@ -28,7 +28,7 @@ const Profile = () => {
   const fetchData = async () => {
     setLoading(true);
     const response = await axios.get(
-      ` http://localhost:4999/photographer/${getId()}`
+      ` /photographer/${getId()}`
     );
     setPg(response.data);
     setLoading(false);
@@ -37,13 +37,13 @@ const Profile = () => {
   const fetchData2 = async () => {
     setLoading(true);
     const response = await axios.get(
-      `http://localhost:4999/pg/post/photographer/${getId()}`
+      `/pg/post/photographer/${getId()}`
     );
     setPosts(response.data);
     setLoading(false);
   };
   const fetchService = async () => {
-    const response = await axios.get(`http://localhost:4999/service/`);
+    const response = await axios.get(`/service/`);
     setCategory(
       response.data.map(item => {
         return { name: item.name, value: item._id };
@@ -51,7 +51,7 @@ const Profile = () => {
     );
   };
   const onPost = async () => {
-    const response = await axios.post('http://localhost:4999/pg/post', post);
+    const response = await axios.post('/pg/post', post);
     console.log(response);
     fetchData2();
     SetIsOpen(false);
@@ -59,13 +59,13 @@ const Profile = () => {
 
   const postLike = async postId => {
     const response = await axios.patch(
-      `http://localhost:4999/pg/post/${postId}/like/${getId()}`
+      `/pg/post/${postId}/like/${getId()}`
     );
     fetchData2();
   };
   const postDislike = async postId => {
     const response = await axios.patch(
-      `http://localhost:4999/pg/post/${postId}/unlike/${getId()}`
+      `/pg/post/${postId}/unlike/${getId()}`
     );
     fetchData2();
   };

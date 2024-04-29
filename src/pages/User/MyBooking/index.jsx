@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './style.css';
 import { getId } from '../../../utils';
-import axios from 'axios';
+import axios from '../../../utils/axios';
 
 import Button from './../../../components/Button/index';
 
@@ -9,7 +9,7 @@ const UserBookings = () => {
   const [bookings, setBookings] = useState([]);
   const fetchApp = async () => {
     const response = await axios.get(
-      `http://localhost:4999/book/user/${getId()}`
+      `/book/user/${getId()}`
     );
     console.log(response.data);
     setBookings(response.data);
@@ -22,9 +22,9 @@ const UserBookings = () => {
   }
   const onClick = async (id, status) => {
     if (status == 'CANCELLED') {
-      await axios.delete(`http://localhost:4999/book/${id}`);
+      await axios.delete(`/book/${id}`);
     }
-    await axios.patch(`http://localhost:4999/book/cancel/${id}`);
+    await axios.patch(`/book/cancel/${id}`);
     fetchApp();
   };
   console.log(bookings);

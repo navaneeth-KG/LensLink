@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getId } from '../../../utils';
 import './style.css';
-import axios from 'axios';
+import axios from '../../../utils/axios';
 import Loading from '../../../components/Loading';
 import Button from './../../../components/Button/index';
 
@@ -9,17 +9,17 @@ const PgBooking = () => {
   const [apps, setApps] = useState([]);
 
   const fetchApps = async () => {
-    const response = await axios.get(`http://localhost:4999/book/${getId()}`);
+    const response = await axios.get(`/book/${getId()}`);
     setApps(response.data);
   };
   const onConfirm = async (id, status) => {
     if (status == 'REQUESTED') {
-      const response = await axios.patch(`http://localhost:4999/book/${id}`);
+      const response = await axios.patch(`/book/${id}`);
       alert(response.data.message);
       fetchApps();
     } else if (status == 'ACCEPTED') {
       const response = await axios.patch(
-        `http://localhost:4999/book/cancel/${id}`
+        `/book/cancel/${id}`
       );
       alert(response.data.message);
       fetchApps();
@@ -27,7 +27,7 @@ const PgBooking = () => {
   };
 
   const onAppDel = async id => {
-    const response = await axios.delete(`http://localhost:4999/book/${id}`);
+    const response = await axios.delete(`/book/${id}`);
     alert(response.data.message);
     fetchApps();
   };

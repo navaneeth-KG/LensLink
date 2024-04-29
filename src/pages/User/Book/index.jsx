@@ -2,7 +2,7 @@ import './style.css';
 import Select from '../../../components/Select';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../../../utils/axios';
 import Button from '../../../components/Button';
 import { getId } from '../../../utils';
 import Input from '../../../components/Input';
@@ -27,7 +27,7 @@ const Book = () => {
 
   const navigate = useNavigate();
   const fetchData = async () => {
-    const response = await axios.get('http://localhost:4999/service');
+    const response = await axios.get('/service');
     setServices(
       response.data.map(item => {
         return { value: item._id, name: item.name };
@@ -36,12 +36,12 @@ const Book = () => {
   };
   const fetchApp = async () => {
     const response = await axios.get(
-      `http://localhost:4999/book/user/${getId()}`
+      `/book/user/${getId()}`
     );
     setApps(response.data);
   };
   const fetchLocations = async () => {
-    const response = await axios.get('http://localhost:4999/location');
+    const response = await axios.get('/location');
    
     setplaces( response.data.map(item => {
       return { name: item.name, value: item._id };
@@ -80,7 +80,7 @@ const Book = () => {
   };
   const onClick = async () => {
     const response = await axios.get(
-      `http://localhost:4999/photographer/search/${category}/${location}`
+      `/photographer/search/${category}/${location}`
     );
     setPgs(response.data);
   };
@@ -89,7 +89,7 @@ const Book = () => {
   };
 
   const onBook = async () => {
-    const response = await axios.post('http://localhost:4999/book', book);
+    const response = await axios.post('/book', book);
     console.log(response.data);
     if (response.data) {
       alert('request sent');

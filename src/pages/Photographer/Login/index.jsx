@@ -3,7 +3,7 @@ import Input from '../../../components/Input';
 import Button from '../../../components/Button';
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../../../utils/axios';
 const Login = () => {
   const [pg, setPg] = useState({ email: '', password: '' });
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ const Login = () => {
 
   const onClick = async () => {
     const response = await axios.post(
-      'http://localhost:4999/photographer/signin',
+      '/photographer/signin',
       pg
     );
     if (response.data.token) {

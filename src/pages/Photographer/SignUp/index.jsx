@@ -3,7 +3,7 @@ import './style.css';
 import Input from '../../../components/Input';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../../../utils/axios';
 import Button from './../../../components/Button/index';
 
 const SignUp = () => {
@@ -20,7 +20,7 @@ const SignUp = () => {
   const [places, setplaces] = useState([]);
 
   //   const fetchData = async () => {
-  //     const response = await axios.get('http://localhost:4999/service');
+  //     const response = await axios.get('/service');
   //     setServices(
   //       response.data.map(item => {
   //         return { value: item._id, name: item.name };
@@ -29,7 +29,7 @@ const SignUp = () => {
   //   };
 
   const fetchLocations = async () => {
-    const response = await axios.get('http://localhost:4999/location');
+    const response = await axios.get('/location');
     response.data.map(item => {
       return { name: item.name, value: item._id };
     });
@@ -41,7 +41,7 @@ const SignUp = () => {
       const formdata = new FormData();
       formdata.append('file', e.target.files[0]);
       const response = await axios.post(
-        'http://localhost:4999/image',
+        '/image',
         formdata
       );
       setPg({ ...pg, image: response.data.url });
@@ -51,7 +51,7 @@ const SignUp = () => {
   };
 
   const onSignUp = async () => {
-    await axios.post('http://localhost:4999/photographer/signup', pg);
+    await axios.post('/photographer/signup', pg);
   };
 
   console.log(pg);

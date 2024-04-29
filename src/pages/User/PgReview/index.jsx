@@ -1,5 +1,5 @@
 import './style.css';
-import axios from 'axios';
+import axios from '../../../utils/axios';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Loading from '../../../components/Loading';
@@ -9,7 +9,7 @@ const PgReview = () => {
   const { id } = useParams();
 
   const fetchReviews = async () => {
-    const response = await axios.get(`http://localhost:4999/review/${id}`);
+    const response = await axios.get(`/review/${id}`);
     setreviews(response.data);
   };
   console.log(reviews);

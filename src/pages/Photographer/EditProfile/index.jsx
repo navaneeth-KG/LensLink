@@ -1,5 +1,5 @@
 import './style.css';
-import axios from 'axios';
+import axios from '../../../utils/axios';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Button from './../../../components/Button/index';
@@ -19,12 +19,12 @@ const PgEditProfile = () => {
   
   const fetchPhotographer = async () => {
     const response = await axios.get(
-      `http://localhost:4999/photographer/${id}`
+      `/photographer/${id}`
     );
     setPg({ ...response.data, service: [] });
   };
   const fetchServices = async () => {
-    const response = await axios.get(`http://localhost:4999/service`);
+    const response = await axios.get(`/service`);
     setServices(
       response.data.map(item => {
         return { value: item._id, name: item.name };
@@ -47,7 +47,7 @@ const PgEditProfile = () => {
   };
   const onEdit = async () => {
     const response = await axios.patch(
-      `http://localhost:4999/photographer/${id}`,
+      `/photographer/${id}`,
       pg
     );
     alert(response.data.message);

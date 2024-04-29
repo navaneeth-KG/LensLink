@@ -20,7 +20,7 @@ const ProfileBook = () => {
 
   const fetchPg = async () => {
     const response = await axios.get(
-      `http://localhost:4999/photographer/${id}`
+      `/photographer/${id}`
     );
     setPg(response.data);
     setService(
@@ -38,7 +38,7 @@ const ProfileBook = () => {
   };
   const sendReq = async () => {
     if (getRole == 'user') {
-      const response = await axios.post(`http://localhost:4999/book`, book);
+      const response = await axios.post(`/book`, book);
       alert(response.data.message);
       setState(true);
     } else {

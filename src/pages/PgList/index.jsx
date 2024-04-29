@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../../utils/axios';
 import './style.css';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
@@ -12,12 +12,12 @@ const PgList = () => {
   const navigate = useNavigate()
   const fetchPhotographers = async () => {
     const response = await axios.get(
-      `http://localhost:4999/photographer/service/${id}`
+      `/photographer/service/${id}`
     );
     setPg(response.data);
   };
   const fetchLocations = async () => {
-    const response = await axios.get('http://localhost:4999/location');
+    const response = await axios.get('/location');
 
     setplaces(
       response.data.map(item => {
@@ -28,7 +28,7 @@ const PgList = () => {
 
   const fetchPgsByLoc = async e => {
     const response = await axios.get(
-      `http://localhost:4999/photographer/search/${id}/${e.target.value}`
+      `/photographer/search/${id}/${e.target.value}`
     );
     setPg(response.data)
   };

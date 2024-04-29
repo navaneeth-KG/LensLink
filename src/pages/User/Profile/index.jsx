@@ -1,9 +1,8 @@
 import './style.css';
-import axios from 'axios';
+import axios from '../../../utils/axios';
 import { useState, useEffect } from 'react';
 import Button from '../../../components/Button';
 import Input from './../../../components/Input/index';
-
 import { getId } from './../../../utils/index';
 
 const UserProfile = () => {
@@ -14,7 +13,7 @@ const UserProfile = () => {
     email: '',
   });
   const fetchUser = async () => {
-    const response = await axios.get(`http://localhost:4999/user/${getId()}`);
+    const response = await axios.get(`/user/${getId()}`);
     setUser(response.data);
   };
 
@@ -23,7 +22,7 @@ const UserProfile = () => {
       const formdata = new FormData();
       formdata.append('file', e.target.files[0]);
       const response = await axios.post(
-        'http://localhost:4999/image',
+        '/image',
         formdata
       );
       setUser({ ...user, image: response.data.url });
@@ -32,7 +31,7 @@ const UserProfile = () => {
     }
   };
   const onClick = async () => {
-    const response = await axios.patch(`http://localhost:4999/user/${getId()}`,user);
+    const response = await axios.patch(`/user/${getId()}`,user);
     alert(response.data.message);
     fetchUser();
   };

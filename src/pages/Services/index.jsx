@@ -1,6 +1,6 @@
 import './style.css';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../../utils/axios';
 import Loading from '../../components/Loading';
 import Footer from '../../components/Footer';
 import { useNavigate } from 'react-router-dom';
@@ -8,7 +8,7 @@ const Services = () => {
   const [services, setServices] = useState([]);
   const navigate = useNavigate();
   const fetchServices = async () => {
-    const response = await axios.get('http://localhost:4999/service');
+    const response = await axios.get('/service');
     setServices(response.data);
   };
   const onClick = id => {

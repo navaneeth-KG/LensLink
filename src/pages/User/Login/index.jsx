@@ -2,8 +2,7 @@ import './style.css';
 import Input from './../../../components/Input/index';
 import Button from '../../../components/Button';
 import { useState } from 'react';
-
-import axios from 'axios';
+import axios from '../../../utils/axios';
 import { useNavigate } from 'react-router-dom';
 
 const UserLogin = () => {
@@ -34,7 +33,7 @@ const UserLogin = () => {
         const formdata = new FormData();
         formdata.append('file', e.target.files[0]);
         const response = await axios.post(
-          'http://localhost:4999/image',
+          '/image',
           formdata
         );
         setSignUp({ ...signUp, image: response.data.url });
@@ -47,7 +46,7 @@ const UserLogin = () => {
   };
   const signInClick = async () => {
     const response = await axios.post(
-      'http://localhost:4999/user/signin',
+      '/user/signin',
       signIn
     );
     alert(response.data.message);
@@ -60,7 +59,7 @@ const UserLogin = () => {
    
   };
   const signUpClick = async () => {
-    await axios.post('http://localhost:4999/user/signup', signUp);
+    await axios.post('/user/signup', signUp);
     alert('account creatred');
   };
   return (

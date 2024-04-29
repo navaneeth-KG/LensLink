@@ -1,7 +1,7 @@
 import './style.css';
 import { getId } from '../../utils';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../../utils/axios';
 import { getRole } from '../../utils';
 import { useEffect, useState } from 'react';
 const Navbar = () => {
@@ -22,11 +22,11 @@ const Navbar = () => {
   const [user, setUser] = useState({});
   const fetchUser = async () => {
     if (getRole() == 'user') {
-      const response = await axios.get(`http://localhost:4999/user/${getId()}`);
+      const response = await axios.get(`/user/${getId()}`);
       setUser(response.data);
     } else if (getRole() == 'photographer') {
       const response = await axios.get(
-        `http://localhost:4999/photographer/${getId()}`
+        `/photographer/${getId()}`
       );
       setUser(response.data);
     }

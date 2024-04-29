@@ -1,5 +1,5 @@
 import './style.css';
-import axios from 'axios';
+import axios from '../../../utils/axios';
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Input from './../../../components/Input/index';
@@ -33,7 +33,7 @@ const PgProfile = () => {
   const navigate = useNavigate();
   const fetchPg = async () => {
     const response = await axios.get(
-      `http://localhost:4999/photographer/${id}`
+      `/photographer/${id}`
     );
     setpg(response.data);
     setService(
@@ -47,7 +47,7 @@ const PgProfile = () => {
 
   const fetchPosts = async () => {
     const response = await axios.get(
-      `http://localhost:4999/pg/post/photographer/${id}`
+      `/pg/post/photographer/${id}`
     );
     setPosts(response.data);
   };
@@ -60,7 +60,7 @@ const PgProfile = () => {
     }
   };
   const ReviewPost = async () => {
-    await axios.post('http://localhost:4999/review', review);
+    await axios.post('/review', review);
     setView(false);
   };
   const ratingSelect = e => {
@@ -73,7 +73,7 @@ const PgProfile = () => {
   console.log(review);
 
   const fetchReviews = async () => {
-    const response = await axios.get(`http://localhost:4999/review/${id}`);
+    const response = await axios.get(`/review/${id}`);
     console.log(response.data);
     const avgReview = response.data.map(item => item.rating);
     console.log(avgReview);
@@ -99,7 +99,7 @@ const PgProfile = () => {
   // };
   const postLike = async postId => {
     const response = await axios.patch(
-      `http://localhost:4999/pg/post/${postId}/like/${getId()}`
+      `/pg/post/${postId}/like/${getId()}`
     );
     fetchPosts();
     if (!getId()) {
@@ -108,7 +108,7 @@ const PgProfile = () => {
   };
   const postDislike = async postId => {
     const response = await axios.patch(
-      `http://localhost:4999/pg/post/${postId}/unlike/${getId()}`
+      `/pg/post/${postId}/unlike/${getId()}`
     );
     fetchPosts();
   };

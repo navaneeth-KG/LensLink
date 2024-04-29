@@ -1,5 +1,5 @@
 import './style.css';
-import axios from 'axios';
+import axios from '../../utils/axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
@@ -15,20 +15,20 @@ const ServicePage = () => {
   const navigate = useNavigate();
 
   const fetchService = async () => {
-    const response = await axios.get(`http://localhost:4999/service/${id}`);
+    const response = await axios.get(`/service/${id}`);
     setService(response.data);
   };
 
   const fetchPhotographers = async () => {
     const response = await axios.get(
-      `http://localhost:4999/photographer/service/${id}`
+      `/photographer/service/${id}`
     );
     console.log(response.data);
     setPgs(response.data);
   };
   const fetchreviews = async () => {
     const response = await axios.get(
-      `http://localhost:4999/review/service/${id}`
+      `/review/service/${id}`
     );
     console.log(response.data);
     setReviews(response.data);
@@ -68,7 +68,7 @@ const ServicePage = () => {
 
   const fetchPosts = async () => {
     const response = await axios.get(
-      `http://localhost:4999/pg/post/service/${id}`
+      `/pg/post/service/${id}`
     );
     response.data.sort((a, b) => {
       return b.likes.count - a.likes.count;
@@ -83,7 +83,7 @@ const ServicePage = () => {
   const postLike = async postId => {
     
     const response = await axios.patch(
-      `http://localhost:4999/pg/post/${postId}/like/${getId()}`
+      `/pg/post/${postId}/like/${getId()}`
     );
     fetchPosts();
     if(!getId()){
@@ -92,7 +92,7 @@ const ServicePage = () => {
   };
   const postDislike = async postId => {
     const response = await axios.patch(
-      `http://localhost:4999/pg/post/${postId}/unlike/${getId()}`
+      `/pg/post/${postId}/unlike/${getId()}`
     );
     fetchPosts();
   };

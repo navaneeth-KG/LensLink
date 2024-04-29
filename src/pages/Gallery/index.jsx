@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './style.css';
 import { useParams } from 'react-router-dom';
 import PostModal from '../../components/PostModal';
-import axios from 'axios';
+import axios from '../../utils/axios';
 import { getId } from './../../utils/index';
 import Footer from './../../components/Footer/index';
 import Loading from '../../components/Loading';
@@ -14,7 +14,7 @@ const Gallery = () => {
   const [post, setPost] = useState({});
   const fetchPosts = async () => {
     const response = await axios.get(
-      `http://localhost:4999/pg/post/service/${id}`
+      `/pg/post/service/${id}`
     );
     // response.data.sort((a, b) => {
     //   return b.likes.count - a.likes.count;
@@ -30,13 +30,13 @@ const Gallery = () => {
   };
   const postLike = async postId => {
     const response = await axios.patch(
-      `http://localhost:4999/pg/post/${postId}/like/${getId()}`
+      `/pg/post/${postId}/like/${getId()}`
     );
     fetchPosts();
   };
   const postDislike = async postId => {
     const response = await axios.patch(
-      `http://localhost:4999/pg/post/${postId}/unlike/${getId()}`
+      `/pg/post/${postId}/unlike/${getId()}`
     );
     fetchPosts();
   };

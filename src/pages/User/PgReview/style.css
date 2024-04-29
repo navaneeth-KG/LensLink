@@ -8,6 +8,7 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    margin-top: 60px;
 }
 .fa-star{
     color: rgb(59, 59, 253);
