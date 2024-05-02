@@ -30,10 +30,10 @@ const SignUp = () => {
 
   const fetchLocations = async () => {
     const response = await axios.get('/location');
-    response.data.map(item => {
+    const placeArr= response.data.map(item => {
       return { name: item.name, value: item._id };
     });
-    setplaces(response.data)
+    setplaces(placeArr)
   };
 
   const onInpChange = async (e, key) => {
