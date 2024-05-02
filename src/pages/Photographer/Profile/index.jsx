@@ -28,7 +28,7 @@ const Profile = () => {
   const fetchData = async () => {
     setLoading(true);
     const response = await axios.get(
-      ` /photographer/${getId()}`
+      `/photographer/${getId()}`
     );
     setPg(response.data);
     setLoading(false);
